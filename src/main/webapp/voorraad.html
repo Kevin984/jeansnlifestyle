@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Dashboard Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="dashboard.css" rel="stylesheet">
+	
+	<link href="css/bootstrap.icon-large.min.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	<style>
+	#wijzigKnop{
+	text-decoration: none;
+	color: white;
+	}
+	</style>
+	
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="https://localhost:8443/JeansNLifestyle/index.html">Jeans & Lifestyle</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Uitloggen</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" id="artikelInput" onkeyup="filterFunction()" placeholder="Artikel Zoeken">
+          </form>
+        </div>
+      </div>
+    </nav>
+
+   <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <div id="sidebar" class="well sidebar-nav">
+                <h5><i class="glyphicon glyphicon-home"></i>
+                    <small><b>MANAGEMENT</b></small>
+                </h5>
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="active"><a>Hoofdmenu</a></li>
+                    <li><a href="kassa.html">Kassa</a></li>
+                    <li><a href="klanten.html">Klanten</a></li>
+					<li><a href="voorraad.html">Voorraad</a></li>
+					<li><a href="verkopen.html">Verkopen</a></li>
+                </ul>
+               
+				
+            </div>
+        </div>
+		
+		
+		
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header" id="voorraadH1">Voorraad <div class="pull-right"><button type="button" class="btn btn-success">Artikel aanmaken</button></div></h1>
+			<div id='expendable'></div>
+          <div class="table-responsive">		  
+            <table class="table table-striped" id='voorraad'>
+              <thead>
+                <tr>
+                  <th class="col-xs-1">#ID</th>
+                  <th class="col-xs-3">Naam</th>
+                  <th class="col-xs-1">Categorie</th>
+                  <th class="col-xs-1">Maat</th>
+                  <th class="col-xs-1">Kleur</th>
+				  <th class="col-xs-2">Merk</th>
+				  <th class="col-xs-1">Inkoopprijs</th>
+				  <th class="col-xs-1">Verkoopprijs</th>
+				  <th class="col-xs-1">Aantal</th>
+				 <th class="col-xs-1">Wijzigen</th>
+				 <th class="col-xs-1">Verwijderen</th>
+                </tr>
+              </thead>
+              <tbody>
+              
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="assets/js/vendor/holder.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+    
+     <script> 
+     
+     function filterFunction(){ <!-- filteren van items in de voorraad lijst -->
+    	 var input, filter, table, tr, td, i;
+    	 input = document.getElementById("artikelInput");
+    	 filter = input.value.toUpperCase();
+    	 table = document.getElementById("voorraad");
+    	 tr = table.getElementsByTagName("tr");
+    	 
+    	 for (i = 0; i < tr.length; i++){
+    		 ID = tr[i].getElementsByTagName("td")[0];
+    		 Naam = tr[i].getElementsByTagName("td")[1];
+    		 Maat  = tr[i].getElementsByTagName("td")[3];
+    		 Kleur = tr[i].getElementsByTagName("td")[4];
+    		 Merk  = tr[i].getElementsByTagName("td")[5];
+    		 if(ID || Naam || Maat || Kleur || Merk){
+    			 if (ID.innerHTML.toUpperCase().indexOf(filter) > -1){
+    				 tr[i].style.display="";
+    			 }
+    			 
+    			 else if (Naam.innerHTML.toUpperCase().indexOf(filter) > -1){
+    				 tr[i].style.display="";
+    			 }
+    			 
+    			 else if (Maat.innerHTML.toUpperCase().indexOf(filter) > -1){
+    				 tr[i].style.display="";
+    			 }
+    			 
+    			 else if (Kleur.innerHTML.toUpperCase().indexOf(filter) > -1){
+    				 tr[i].style.display="";
+    			 }
+    			 
+    			 else if (Merk.innerHTML.toUpperCase().indexOf(filter) > -1){
+    				 tr[i].style.display="";
+    			 }
+    			  			 
+    			 else {
+    				 tr[i].style.display = "none";
+    			 } 
+    		 }
+    	 }
+     }
+     
+     
+ 	$.ajax({
+			url: "restservices/voorraad/",
+			method: "GET",
+			beforeSend: function (xhr) {
+			var token = window.sessionStorage.getItem("sessionToken");
+			xhr.setRequestHeader( 'Authorization', 'Bearer ' + token);
+			},
+			success: function (voorraad) {
+				$.each(voorraad, function(i, artikel){
+			   		$("#voorraad").append("<tr><td>" + artikel.ID + "</td><td>" + artikel.Naam + "</td><td>" + artikel.Categorie 
+			   		+ "</td><td>"+ artikel.Maat + "</td><td>" + artikel.Kleur + "</td><td>" + artikel.Merk + "</td><td>€" 
+			   		+ artikel.Inkoopprijs + "</td><td>€" + artikel.Verkoopprijs + "</td><td>" + artikel.Aantal +"</td>" 
+			   		+ "<td><button type='button' class='btn btn-warning' id='alter" + artikel.ID + artikel.Maat + artikel.Kleur 
+			   		+ "'>Artikel Wijzigen</button></td><td>" + "<button type='button' class='btn btn-danger' id='delete" 
+			   		+ artikel.ID + artikel.Maat + artikel.Kleur + "'> Artikel Verwijderen</button>" + "</td></tr>");
+			   		
+			   		$("#alter" + artikel.ID + artikel.Maat + artikel.Kleur).one("click",function(){
+			   			$(this).parents("tr").replaceWith("<tr><form id='updateArtikelForm'>"
+			   			+   "<td><input class='form-control'   type='text' name='ID'        id='" + artikel.ID +"' >" + "</td>" 
+			   			+ 	"<td> <input class='form-control'  type='text' name='Naam'      id='" + artikel.Naam + "'></td>"	
+			   			+ 	"<td> <select class='form-control' type='text' name='Categorie' id='Categorie'>" + "<option>Hoodies & Sweatshirts</option><option>Truien & Vesten</option><option>Shirts & T-Shirts</option><option>Broeken</option><option>Schoenen</option>" + "'</select></td>"	
+			   			+ 	"<td> <input class='form-control'  type='text' name='Maat'      id='" + artikel.Maat + "'></td>"	
+			   			+ 	"<td> <input class='form-control'  type='text' name='Kleur'     id='" + artikel.Kleur + "'></td>"	
+			   			+ 	"<td> <input class='form-control'  type='text' name='Merk'      id='" + artikel.Merk + "'></td>"
+			   			+ 	"<td> <input class='form-control'  type='text' name='Inkoopprijs' id='" + artikel.Inkoopprijs + "'></td>"	
+			   			+ 	"<td> <input class='form-control'  type='text' name='Verkoopprijs'id='" + artikel.Verkoopprijs + "'></td>"	
+			   			+ 	"<td> <input class='form-control'  type='text' name='Aantal'      id='" + artikel.Aantal + "'></td>"	
+			   			+   "<td> <button type='button' class='btn btn-primary' id='wijzigArtikel" + artikel.ID + artikel.Maat + artikel.Kleur + "'>Wijziging opslaan</button> </td>"
+			   			+		"</form></tr>");
+			   			
+			   			$("#wijzigArtikel" + artikel.ID + artikel.Maat + artikel.Kleur).click(function(){
+			   	   			var uri = "/JeansNLifestyle/restservices/voorraad/" + artikel.ID + "/" + artikel.Maat + "/" + artikel.Kleur;
+			   	   			$.ajax(uri, {
+			   	   				method: "PUT",
+			   	   				data: $("#updateArtikelForm").serialize(),
+			   	   			beforeSend: function (xhr) {
+			   					var token = window.sessionStorage.getItem("sessionToken");
+			   					xhr.setRequestHeader( 'Authorization', 'Bearer ' + token);
+			   					},
+			   	   			success: function(response){	
+			   	   				$("#expendable").replaceWith("<div class='alert alert-success' id='response'> <strong>Artikel:</strong> " + artikel.ID + " " + artikel.Naam + " is gewijzigd!</div>");
+			   	   				},
+			   	   			error: function(response){
+			   	   				$("#expendable").replaceWith("<div class='alert alert-danger' id='response'> Er is iets mis gegaan! Artikel is <strong>niet</strong> gewijzigd.</div>");
+			   	   			}
+			   	   			})	
+			   	   		})
+			   		})
+			   		
+			   		
+			   			
+			
+			   		
+			   		$("#delete" + artikel.ID + artikel.Maat + artikel.Kleur).one("click",function(){   
+			   			var uri = ("/JeansNLifestyle/restservices/voorraad/") + artikel.ID + "/" + artikel.Maat + "/" + artikel.Kleur;
+			   			
+			   		  var r = confirm("Weet je zeker dat je dit artikel wilt verwijderen?");
+			   		  
+			   		  if (r == true){
+			   			$.ajax(uri, {
+			   				method: "DELETE",
+			   				beforeSend: function (xhr) {
+			   					var token = window.sessionStorage.getItem("sessionToken");
+			   					xhr.setRequestHeader( 'Authorization', 'Bearer ' + token);
+			   					},
+			   				success: function(response){	
+			   				$("body").load("https://localhost:8443/JeansNLifestyle/voorraad.html")	<!-- refresh pagina -->
+			   				
+			   				function notification(){
+			   				$("#expendable").replaceWith("<div class='alert alert-success' id='response'> <strong>Artikel:</strong> " + artikel.ID + " " + artikel.Naam + " is verwijderd uit de voorraad!</div>");
+			   				} 
+			   				setTimeout(notification, 300); <!-- laat bericht zien,  0.3 seconde na de pagina refresh -->
+			   				},
+			   				
+			   				error: function(response){
+			   				$("#expendable").replaceWith("<div class='alert alert-danger' id='response'> Er is iets mis gegaan! Artikel is <strong>niet</strong> verwijderd.</div>");
+			   			}
+			   			})
+			   		  }
+			   		  else {
+			   		  }
+			   			
+			   		})
+			})
+			}
+			});
+    
+   	
+   		
+   		
+   		
+   	</script>
+  </body>
+</html>
