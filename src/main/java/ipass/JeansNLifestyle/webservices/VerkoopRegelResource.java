@@ -74,8 +74,10 @@ public class VerkoopRegelResource {
 		Artikel newArtikel = artikelService.getArtikelByPK(artikelID, artikelMaat, artikelKleur);
 		int artikelAantal = newArtikel.getAantal();
 		int newArtikelAantal = artikelAantal - aant;
+		//verlaag het aantal van een artikel met het aantal dat geselecteerd wordt bij de verkoop
 		newArtikel.setAantal(newArtikelAantal); 
-		artikelService.updateArtikel(newArtikel); //verlaag het aantal van een artikel met het aantal dat geselecteerd wordt bij de verkoop
+		artikelService.updateArtikel(newArtikel); 
+		
 		
 		VerkoopRegel newVerkoopRegel = new VerkoopRegel(newVerkoop, newArtikel, aant);
 		verkoopregelService.saveVerkoopRegel(newVerkoopRegel);

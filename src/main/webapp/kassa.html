@@ -215,8 +215,8 @@
  		count += 1;
  		$("#verkopenTbody").append("<tr>"
  		    +"<form id='verkoopRegelForm"+count+"'>"
- 		    +"  <td id='verkoopID_"+count+"' style='display:none;'> <input form='verkoopRegelForm"+ count+"' class='form-control IDVRI' name='VerkoopID' readonly  ></input></td>"
- 		    +"	<td id='artikelHiddenID_"+count+"' style='display:none;'> <input  form='verkoopRegelForm"+ count+"'type='text' class='form-control' 	name='ArtikelID'    readonly ></input></td>"
+ 		    +"  <td id='verkoopID_"+count+"' > <input form='verkoopRegelForm"+ count+"' class='form-control IDVRI' name='VerkoopID' readonly  ></input></td>"
+ 		    +"	<td id='artikelHiddenID_"+count+"' > <input  form='verkoopRegelForm"+ count+"'type='text' class='form-control' 	name='ArtikelID'    readonly ></input></td>"
  			+"	<td id='artID_"+count+"'> 			<select class='form-control' id='artikelInputID_"+count+"' name='ArtikelID'><option></option></select></td>"
  			+"	<td id='artNaam_"+count+"'>			<input  class='form-control' readonly value=''></input></td>"
  			+"  <td id='artCategorie_"+count+"'>	<input  class='form-control' readonly value=''></input></td>"
@@ -308,7 +308,7 @@
     			url: "restservices/verkopen/",
     			success: function(response){		
         	var data = $("#verkoopInvoeren").serialize();
-        	$.post("/restservices/verkopen", data, function(response){
+        	$.post("restservices/verkopen", data, function(response){
         //		$(".expendable").replaceWith("<div class='alert alert-success' id='response'> <strong>Verkoop:</strong> " + response.VerkoopID  + " is toegevoegd!</div>");
         	})		
         	}
@@ -322,7 +322,7 @@
 			success: function(response){
 			
 		var data = formDetails.serialize();
-    	$.post("/restservices/verkoopregels", data, function(response){
+    	$.post("restservices/verkoopregels", data, function(response){
     		localStorage.setItem("Expendable",""+response.VerkoopID+"");
     		
     	})	
