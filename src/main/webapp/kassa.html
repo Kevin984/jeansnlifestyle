@@ -317,7 +317,7 @@
     			success: function(response){		
         	var data = $("#verkoopInvoeren").serialize();
         	$.post("restservices/verkopen", data, function(response){
-        //		$(".expendable").replaceWith("<div class='alert alert-success' id='response'> <strong>Verkoop:</strong> " + response.VerkoopID  + " is toegevoegd!</div>");
+        		
         	})		
         	}
         	
@@ -331,8 +331,8 @@
 			
 		var data = formDetails.serialize();
     	$.post("restservices/verkoopregels", data, function(response){
-    		localStorage.setItem("Expendable",""+response.VerkoopID+"");
-    		
+    	//	localStorage.setItem("Expendable",""+response.VerkoopID+"");
+    		$(".expendable").replaceWith("<div class='alert alert-success' id='response'> <strong>Verkoop:</strong> " + response.VerkoopID  + " is toegevoegd!</div>");
     	})	
     	}
     	});
@@ -345,21 +345,21 @@
     		validate(document.forms[i]);
     	}
     	
-    	function reloadPage(){
-    		location.reload();
-    	}
-    	setTimeout(reloadPage, 600);
+   // 	function reloadPage(){
+   // 		location.reload();
+   // 	}
+   // 	setTimeout(reloadPage, 600);
     	
 	});
     
     //zorgt ervoor dat nadat de page refresht wordt, er een bericht komt dat de verkoop met success is aangemaakt en maakt daarna de localstorage leeg voor de volgende verkoop
-    function storageMessage(){
-    if(localStorage.getItem("Expendable")){
-    	$(".expendable").replaceWith("<div class='alert alert-success expendable' id='response'> <strong>Verkoop:</strong> " + localStorage.getItem("Expendable") + " is toegevoegd!</div>");
-    	localStorage.clear();
-    }
-    }
-    setTimeout(storageMessage, 700);
+  //  function storageMessage(){
+   // if(localStorage.getItem("Expendable")){
+   // 	$(".expendable").replaceWith("<div class='alert alert-success expendable' id='response'> <strong>Verkoop:</strong> " + localStorage.getItem("Expendable") + " is toegevoegd!</div>");
+   // 	localStorage.clear();
+   // }
+   // }
+   // setTimeout(storageMessage, 700);
     
    
     </script>
