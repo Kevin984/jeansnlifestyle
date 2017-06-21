@@ -19,7 +19,8 @@ public class ArtikelDAO extends BaseDAO{
 			Statement stmt = con.createStatement();
 			ResultSet dbResultSet = stmt.executeQuery(query);
 			
-			while(dbResultSet.next()){ //voor elke regel pak de ID, naam etc en maar er een artikel van gebruikmakend van Artikel POJO
+			while(dbResultSet.next()){ 
+				//voor elke regel pak de ID, naam etc en maar er een artikel van gebruikmakend van Artikel POJO
 				 int ID = dbResultSet.getInt("ID");
 				 String naam = dbResultSet.getString("Naam");
 				 String categorie = dbResultSet.getString("Categorie");
@@ -30,7 +31,8 @@ public class ArtikelDAO extends BaseDAO{
 				 double verkoopprijs = dbResultSet.getDouble("Verkoopprijs");
 				 int aantal = dbResultSet.getInt("Aantal");
 				 Artikel newArtikel = new Artikel(ID, naam, categorie ,maat, kleur, merk, inkoopprijs, verkoopprijs, aantal);
-				 artikelen.add(newArtikel);		//voeg artikel toe aan artikelen lijst
+				//voeg artikel toe aan artikelen lijst
+				 artikelen.add(newArtikel);		
 			}
 		}
 		catch(SQLException sqle){ sqle.printStackTrace();
@@ -42,7 +44,8 @@ public class ArtikelDAO extends BaseDAO{
 		return selectArtikelen("SELECT \"ID\", \"Naam\", \"Categorie\", \"Maat\", \"Kleur\", \"Merk\", \"Inkoopprijs\", \"Verkoopprijs\", \"Aantal\" FROM public.\"Artikel\" ORDER BY \"ID\" ASC, \"Maat\" ASC, \"Kleur\" ASC ");
 	}
 	
-	public Artikel findByPK(int ID, String maat, String kleur){ //gebruik de primary keys (id, maat, kleur) van artikel om een specifiek artikel te vinden
+	//gebruik de primary keys (id, maat, kleur) van artikel om een specifiek artikel te vinden
+	public Artikel findByPK(int ID, String maat, String kleur){ 	
 		return selectArtikelen("SELECT \"ID\", \"Naam\", \"Categorie\", \"Maat\", \"Kleur\", \"Merk\", \"Inkoopprijs\", \"Verkoopprijs\", \"Aantal\" "
 			+ "FROM public.\"Artikel\" " 
 				+ " WHERE \"ID\" = " + ID + "AND \"Maat\" = '" + maat + "' AND \"Kleur\" = '" + kleur + "'").get(0);
@@ -53,8 +56,10 @@ public class ArtikelDAO extends BaseDAO{
 		
 		try (Connection con = super.getConnection()) {
 			preparedStatement = con.prepareStatement(query);
-			preparedStatement.setInt(1, artikel.getArtikelID()); // eerste vraagteken = 1
-			preparedStatement.setString(2, artikel.getNaam()); //tweede = 2, etc.
+			// eerste vraagteken = 1
+			preparedStatement.setInt(1, artikel.getArtikelID()); 
+			//tweede = 2, etc.
+			preparedStatement.setString(2, artikel.getNaam()); 
 			preparedStatement.setString(3,  artikel.getCategorie());
 			preparedStatement.setString(4, artikel.getMaat());
 			preparedStatement.setString(5, artikel.getKleur());
@@ -84,7 +89,8 @@ public class ArtikelDAO extends BaseDAO{
 			
 			try(Connection con = super.getConnection()){
 				Statement stmt = con.createStatement();
-				preparedStatement = con.prepareStatement(query2); //verwijder eerst alle verkoopregels met hetzelfde artikel omdat ze gelinkt zijn aan artikel
+				//verwijder eerst alle verkoopregels met hetzelfde artikel omdat ze gelinkt zijn aan artikel
+				preparedStatement = con.prepareStatement(query2); 
 				
 				preparedStatement.setInt(1, artikel.getArtikelID());
 				preparedStatement.setString(2, artikel.getMaat());
@@ -93,13 +99,15 @@ public class ArtikelDAO extends BaseDAO{
 				preparedStatement.close();
 				
 				preparedStatement = con.prepareStatement(query);
-				if(preparedStatement.executeUpdate() == 1){     //verwijder nu het artikel
+				//verwijder nu het artikel
+				if(preparedStatement.executeUpdate() == 1){     
 					result = true;
 				}
 				preparedStatement.close();
 				
 				
-				if(stmt.executeUpdate(query) == 1){ //als er niet meer en niet minder dan 1 regel is verwijderd, result = true
+				//als er niet meer en niet minder dan 1 regel is verwijderd, result = true
+				if(stmt.executeUpdate(query) == 1){ 
 					result = true;
 					
 				
@@ -135,12 +143,13 @@ public class ArtikelDAO extends BaseDAO{
 	}
 	 */
 	
-	public boolean updateArtikel(Artikel artikel){ //deze functie zou eerst gebruikt worden voor Use Case: wijzig artikel maar wordt nu gebruikt om het aantal van het artikel te verlagen wanneer er iets verkocht wordt
+	//deze functie zou eerst gebruikt worden voor Use Case: wijzig artikel maar wordt nu gebruikt om het aantal van het artikel te verlagen wanneer er iets verkocht wordt
+	public boolean updateArtikel(Artikel artikel){ 
 		boolean result = false;
 		boolean artikelExists = findByPK(artikel.getArtikelID(), artikel.getMaat(), artikel.getKleur()) != null; //zoek artikel met de primary keys
 		
-		
-		if(artikelExists){ //update artikel in database
+		//update artikel in database
+		if(artikelExists){ 
 			String query = "UPDATE public.\"Artikel\" "
 			+ " SET \"Naam\" = '" 		+ artikel.getNaam()			+"'," 
 			+ "  \"Categorie\" = '" 	+ artikel.getCategorie()	+"'," 
@@ -166,9 +175,4 @@ public class ArtikelDAO extends BaseDAO{
 			return result;
 		
 	}
-	
-	
-	
-	
-
 }

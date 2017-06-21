@@ -115,7 +115,8 @@ input[type="password"] {
     $("#login").click(function(event) {
     	var data = $("#loginform").serialize();
     	$.post("restservices/authentication", data, function(response) {
-    	window.sessionStorage.setItem("sessionToken", response); //geef gebruiker een token voor rechten
+    		//geef gebruiker een token voor rechten
+    	window.sessionStorage.setItem("sessionToken", response); 
     	window.location.href="hoofdpagina.html";
     	}).fail(function(jqXHR, textStatus, errorThrown) {
     	console.log(textStatus);

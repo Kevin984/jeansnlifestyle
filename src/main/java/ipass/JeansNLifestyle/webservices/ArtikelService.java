@@ -6,7 +6,8 @@ import ipass.JeansNLifestyle.domain.Artikel;
 import ipass.JeansNLifestyle.persistence.ArtikelDAO;
 
 public class ArtikelService {
-private ArtikelDAO artikelDAO = new ArtikelDAO(); //import DAO om alle DAOmethoden aan te roepen met alle onderstaande methoden
+	//import DAO om alle DAOmethoden aan te roepen met alle onderstaande methoden
+private ArtikelDAO artikelDAO = new ArtikelDAO(); 
 
 public List<Artikel> getVoorraad(){
 	return artikelDAO.findAll();

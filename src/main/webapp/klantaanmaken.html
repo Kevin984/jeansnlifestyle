@@ -134,7 +134,8 @@
    		xhr.setRequestHeader( 'Authorization', 'Bearer ' + token);
    		},
    		success: function (IDResult) {
-   			$("#IDKA").val(IDResult.nextklantID); //zet eerst mogelijke klantID (niet aanpasbaar)
+   		//zet eerst mogelijke klantID (niet aanpasbaar)
+   			$("#IDKA").val(IDResult.nextklantID); 
    	     }
        });
        
@@ -181,7 +182,8 @@
 			success: function(response){
 				var data = $("#klantAanmaken").serialize();
 		    	$.post("/restservices/klanten", data, function(response){
-	   				$("#klantAanmaken")[0].reset(); // reset de form voor nieuwe input 
+		    		// reset de form voor nieuwe input 
+	   				$("#klantAanmaken")[0].reset(); 
 
    				function notification(){
    				$(".expendable").replaceWith("<div class='alert alert-success expendable' id='response'> <strong>Klant:</strong> " + response.Naam + " is toegevoegd!</div>");
@@ -197,7 +199,8 @@
    			   	     }
    			       });
 		    	}
-   				setTimeout(notification, 300); // laat bericht zien,  0.3 seconde na de pagina refresh
+   			// laat bericht zien,  0.3 seconde na de pagina refresh
+   				setTimeout(notification, 300); 
 
 		    	
 		    	})

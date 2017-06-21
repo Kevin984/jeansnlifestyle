@@ -23,7 +23,8 @@ import ipass.JeansNLifestyle.webservices.ArtikelService;
 import ipass.JeansNLifestyle.webservices.ArtikelServiceProvider;
 import ipass.JeansNLifestyle.domain.Artikel;
 
-@Path("/voorraad") //pad waar json komt te staan (restservices/voorraad)
+//pad waar json komt te staan (restservices/voorraad)
+@Path("/voorraad") 
 public class ArtikelResource {
 	ArtikelService artikelService = ArtikelServiceProvider.getVoorraadService();
 	
@@ -34,7 +35,8 @@ public class ArtikelResource {
 		ArtikelService service = ArtikelServiceProvider.getVoorraadService();
 		JsonArrayBuilder jab = Json.createArrayBuilder();
 		
-		for(Artikel a : service.getVoorraad()){ //maak json van alle gegevens van elk artikel
+		for(Artikel a : service.getVoorraad()){ 
+			//maak json van alle gegevens van elk artikel
 			JsonObjectBuilder job = Json.createObjectBuilder();
 			job.add("ID", a.getArtikelID());
 			job.add("Naam", a.getNaam());
@@ -103,7 +105,8 @@ public class ArtikelResource {
 	
 	
 	@DELETE
-	@RolesAllowed({"user", "admin"}) //hier doen de rollen het wel, alleen user en admin kunnen dus een artikel verwijderen
+	@RolesAllowed({"user", "admin"}) 
+	//hier doen de rollen het wel, alleen user en admin kunnen dus een artikel verwijderen
 	@Path("{ID}/{Maat}/{Kleur}")
 	public Response deleteArtikel(@PathParam("ID") int ID, @PathParam("Maat")String maat, @PathParam("Kleur") String kleur ){
 		Artikel found = null;

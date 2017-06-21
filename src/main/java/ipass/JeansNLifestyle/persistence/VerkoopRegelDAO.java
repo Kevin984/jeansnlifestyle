@@ -36,7 +36,8 @@ public class VerkoopRegelDAO extends BaseDAO{
 				 Artikel newArtikel = artikelDAO.findByPK(artikelID, artikelMaat, artikelKleur);
 				 Verkoop newVerkoop = verkoopDAO.findByVerkoopID(ID);
 				 
-				 VerkoopRegel newVerkoopRegel = new VerkoopRegel(newVerkoop, newArtikel, aantal); //link verkoop met verkoopregel, nu kan verkoopregel hier het verkoopID van halen
+				//link verkoop met verkoopregel, nu kan verkoopregel hier het verkoopID van halen
+				 VerkoopRegel newVerkoopRegel = new VerkoopRegel(newVerkoop, newArtikel, aantal); 
 				 verkoopregels.add(newVerkoopRegel);
 			}
 		}
@@ -73,8 +74,8 @@ public class VerkoopRegelDAO extends BaseDAO{
 			sqle.printStackTrace();
 		}	
 }
-	
-	private List<VerkoopRegel> selectCompleteVerkopen(String query){ //als dit t niet doet, weer public maken <<
+	//als dit t niet doet, weer public maken <<
+	private List<VerkoopRegel> selectCompleteVerkopen(String query){ 
 		List<VerkoopRegel> verkopencompleet = new ArrayList<VerkoopRegel>();
 
 			try(Connection con = super.getConnection()){

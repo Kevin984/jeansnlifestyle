@@ -55,7 +55,8 @@ public class KlantDAO extends BaseDAO{
 				
 				while (dbResultSet.next()){
 					int ID2 = dbResultSet.getInt("nextid"); 
-					ID = ID2; //ID is nu het eerstvolgend beschikbare klant ID
+					//ID is nu het eerstvolgend beschikbare klant ID
+					ID = ID2; 
 				}
 			}
 			

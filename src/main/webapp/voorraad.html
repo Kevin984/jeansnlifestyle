@@ -129,14 +129,16 @@
      	
      })
      
-     function filterFunction(){ // filteren van items in de voorraad lijst
+     // filteren van items in de voorraad lijst
+     function filterFunction(){ 
     	 var input, filter, table, tr, td, i;
     	 input = document.getElementById("artikelInput");
     	 filter = input.value.toUpperCase();
     	 table = document.getElementById("voorraad");
     	 tr = table.getElementsByTagName("tr");
     	 
-    	 for (i = 0; i < tr.length; i++){ //zoek een artikel op ID, naam, maat, kleur of merk
+    	 //zoek een artikel op ID, naam, maat, kleur of merk
+    	 for (i = 0; i < tr.length; i++){
     		 ID = tr[i].getElementsByTagName("td")[0];
     		 Naam = tr[i].getElementsByTagName("td")[1];
     		 Maat  = tr[i].getElementsByTagName("td")[3];
@@ -179,7 +181,8 @@
 			xhr.setRequestHeader( 'Authorization', 'Bearer ' + token);
 			},
 			success: function (voorraad) {
-				$.each(voorraad, function(i, artikel){ //vul hele pagina met alle artikelen
+				//vul hele pagina met alle artikelen
+				$.each(voorraad, function(i, artikel){ 
 			   		$("#voorraad").append("<tr><td>" + artikel.ID + "</td><td>" + artikel.Naam + "</td><td>" + artikel.Categorie 
 			   		+ "</td><td>"+ artikel.Maat + "</td><td>" + artikel.Kleur + "</td><td>" + artikel.Merk + "</td><td>€" 
 			   		+ artikel.Inkoopprijs + "</td><td>€" + artikel.Verkoopprijs + "</td><td>" + artikel.Aantal +"</td>" 
@@ -187,7 +190,8 @@
 			   		+ "'>Artikel Wijzigen</button></td><td>" + "<button type='button' class='btn btn-danger' id='delete" 
 			   		+ artikel.ID + artikel.Maat + artikel.Kleur + "'> Artikel Verwijderen</button>" + "</td></tr>");
 			   		
-			   		$("#alter" + artikel.ID + artikel.Maat + artikel.Kleur).one("click",function(){ //als gebruiker op wijzig artikel klikt, maak van alle gegevens input velden met daarin wel de bijhorende gegevens
+			   		$("#alter" + artikel.ID + artikel.Maat + artikel.Kleur).one("click",function(){ 
+			   			//als gebruiker op wijzig artikel klikt, maak van alle gegevens input velden met daarin wel de bijhorende gegevens
 			   			$(this).parents("tr").replaceWith("<tr><form id='updateArtikelForm'>"
 			   			+   "<td><input class='form-control'   type='text' name='ID'        id='" + artikel.ID +"' value='" + artikel.ID + "' readonly></td>" 
 			   			+ 	"<td> <input class='form-control'  type='text' name='Naam'      id='" + artikel.Naam + "' value='"+artikel.Naam+"'></td>"	
@@ -218,11 +222,14 @@
 			   	   				$(".expendable").replaceWith("<div class='alert alert-danger' id='response'> Er is iets mis gegaan! Artikel is <strong>niet</strong> gewijzigd.</div>");
 			   	   			}
 			   	   			})	*/
-			   				alert("Deze functie werkt nog niet. Onze excuses."); //functie hierboven in de comment werkt niet door een '403 forbidden' error, nu krijgt de gebruiker een bericht van de browser  			
+			   	   	//functie hierboven in de comment werkt niet door een '403 forbidden' error, nu krijgt de gebruiker een bericht van de browser  			
+			   				alert("Deze functie werkt nog niet. Onze excuses."); 
 			   	   		})
 			   	   		
 			   	   		$("#wijzigArtikelAnnuleren"+artikel.ID + artikel.Maat + artikel.Kleur).click(function(){
-			   	   		location.reload();	// refresh pagina
+			   	   	// refresh pagina
+			   	   		location.reload();	
+			   	   		
 			   	   		})
 			   	})
 			   		
@@ -230,9 +237,11 @@
 			   		$("#delete" + artikel.ID + artikel.Maat + artikel.Kleur).one("click",function(){   
 			   			var uri = ("/restservices/voorraad/") + artikel.ID + "/" + artikel.Maat + "/" + artikel.Kleur;
 			   			
-			   		  var r = confirm("Weet je zeker dat je dit artikel wilt verwijderen?"); //vraag gebruiker om op OK of annuleren te drukken
+			   		//vraag gebruiker om op OK of annuleren te drukken
+			   		  var r = confirm("Weet je zeker dat je dit artikel wilt verwijderen?"); 
 			   		  
-			   		  if (r == true){ //als gebruiker OK kiest, verwijder artikel. hiermee worden ook alle verkoopregels verwijderd die gelinkt zijn aan dit artikel(zie artikelDAO.java)
+			   		//als gebruiker OK kiest, verwijder artikel. hiermee worden ook alle verkoopregels verwijderd die gelinkt zijn aan dit artikel(zie artikelDAO.java)
+			   		  if (r == true){ 
 			   			$.ajax(uri, {
 			   				method: "DELETE",
 			   				beforeSend: function (xhr) {
@@ -240,12 +249,14 @@
 			   					xhr.setRequestHeader( 'Authorization', 'Bearer ' + token);
 			   					},
 			   				success: function(response){	
-			   				$("body").load("voorraad.html")	// refresh pagina
+			   				// refresh pagina
+			   				$("body").load("voorraad.html")	
 			   				
 			   				function notification(){
 			   				$(".expendable").replaceWith("<div class='alert alert-success' id='response'> <strong>Artikel:</strong> " + artikel.ID + " " + artikel.Naam + " is verwijderd uit de voorraad!</div>");
 			   				} 
-			   				setTimeout(notification, 300); // laat bericht zien,  0.3 seconde na de pagina refresh
+			   			// laat bericht zien,  0.3 seconde na de pagina refresh
+			   				setTimeout(notification, 300); 
 			   				},
 			   				
 			   				error: function(response){

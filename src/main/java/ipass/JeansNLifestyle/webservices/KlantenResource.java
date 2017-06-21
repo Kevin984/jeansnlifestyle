@@ -68,7 +68,8 @@ public class KlantenResource {
 		job.add("Postcode", k.getPostcode());
 		job.add("Woonplaats", k.getWoonplaats());
 		job.add("Email", k.getEmail());
-		return job.build().toString(); //maak json van een klant object waar ID gelijk is aan klantID
+		//maak json van een klant object waar ID gelijk is aan klantID
+		return job.build().toString(); 
 	} 
 	
 	@GET

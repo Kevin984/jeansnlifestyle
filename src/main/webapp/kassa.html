@@ -152,7 +152,8 @@
     var datumVandaag = ((''+day).length<2?'0' : '') + day + '-' + ((''+month).length<2?'0' : '') + month + '-' + d.getFullYear();
     
     var klantid0 = document.getElementById("klantID");
-    setTimeout(function(){ klantid0.value = "0"}, 500); //zet standaard klantID op 0 voor wanneer een klant niet zijn/haar naam in het systeem wilt
+  //zet standaard klantID op 0 voor wanneer een klant niet zijn/haar naam in het systeem wilt
+    setTimeout(function(){ klantid0.value = "0"}, 500); 
     
     
     $("#datumVandaag input:first-child").val(datumVandaag);
@@ -165,7 +166,8 @@
    		xhr.setRequestHeader( 'Authorization', 'Bearer ' + token);
    		},
    		success: function (IDResult) {
-   			$("#IDVI").val(IDResult.nextverkoopID); //zet eerst volgend beschikbare verkoopID in een niet-aanpasbaar inputveld
+   		//zet eerst volgend beschikbare verkoopID in een niet-aanpasbaar inputveld
+   			$("#IDVI").val(IDResult.nextverkoopID); 
    	     }
        });
     
@@ -179,12 +181,14 @@
 		},
 		success: function (klanten) {
 			 $.each(klanten, function(i, klant){
-				 $("#klantEmail").append("<option>" + klant.ID + ", " + klant.Email + "</option>"); // vul klantemail input met alle klanten emails en IDs
+				// vul klantemail input met alle klanten emails en IDs
+				 $("#klantEmail").append("<option>" + klant.ID + ", " + klant.Email + "</option>"); 
 			 })	
 	     }
     });
     
-    $("#klantEmail").change(function(){ //wanneer klant email veranderd, verander klant ID ook
+  //wanneer klant email veranderd, verander klant ID ook
+    $("#klantEmail").change(function(){ 
 		var klantID = "";
 	
     	$("#klantEmail option:selected").each(function(){
@@ -215,8 +219,8 @@
  		count += 1;
  		$("#verkopenTbody").append("<tr>"
  		    +"<form id='verkoopRegelForm"+count+"'>"
- 		    +"  <td id='verkoopID_"+count+"' > <input form='verkoopRegelForm"+ count+"' class='form-control IDVRI' name='VerkoopID' readonly  ></input></td>"
- 		    +"	<td id='artikelHiddenID_"+count+"' > <input  form='verkoopRegelForm"+ count+"'type='text' class='form-control' 	name='ArtikelID'    readonly ></input></td>"
+ 		    +"  <td id='verkoopID_"+count+"' style='display: none;'> <input form='verkoopRegelForm"+ count+"' class='form-control IDVRI' name='VerkoopID' readonly  ></input></td>"
+ 		    +"	<td id='artikelHiddenID_"+count+"' style='display: none;'> <input  form='verkoopRegelForm"+ count+"'type='text' class='form-control' 	name='ArtikelID'    readonly ></input></td>"
  			+"	<td id='artID_"+count+"'> 			<select class='form-control' id='artikelInputID_"+count+"' name='ArtikelID'><option></option></select></td>"
  			+"	<td id='artNaam_"+count+"'>			<input  class='form-control' readonly value=''></input></td>"
  			+"  <td id='artCategorie_"+count+"'>	<input  class='form-control' readonly value=''></input></td>"
@@ -244,7 +248,8 @@
 		   		xhr.setRequestHeader( 'Authorization', 'Bearer ' + token);
 		   		},
 		   		success: function (IDResult) {
-		   			$(".IDVRI").val(IDResult.nextverkoopID); //elke verkoopregel krijgt de verkoopID mee gestuurd
+		   		//elke verkoopregel krijgt de verkoopID mee gestuurd
+		   			$(".IDVRI").val(IDResult.nextverkoopID); 
 		   	     }
 		       });
     
@@ -256,14 +261,15 @@
 		xhr.setRequestHeader( 'Authorization', 'Bearer ' + token);
 		},
 		success: function (voorraad) {
-			$.each(voorraad, function(i, voorraadArtikel){ //vul lijst onder 'gescand artikel' met alle artikelen uit de voorraad
+			//vul lijst onder 'gescand artikel' met alle artikelen uit de voorraad
+			$.each(voorraad, function(i, voorraadArtikel){ 
 				$("#artikelInputID_"+count).append("<option>" + voorraadArtikel.ID + ", " + voorraadArtikel.Maat +", " +  voorraadArtikel.Kleur + "</option>");
 			})
 			}
 		});
     
-    
-	$("#artikelInputID_"+count).change(function(){ //wanneer een artikel ID/maat/kleur (gescand artikel) wordt veranderd bij de input, veranderd de rest mee (zie hieronder)
+  //wanneer een artikel ID/maat/kleur (gescand artikel) wordt veranderd bij de input, veranderd de rest mee (zie hieronder)
+	$("#artikelInputID_"+count).change(function(){ 
 		var ID = "";
 		var Maat = "";
 		var Kleur = "";
@@ -274,7 +280,8 @@
     		Kleur += $(this).text().split(', ')[2];
     	});
     	
-    	$.get("restservices/voorraad/" + ID + "/" + Maat + "/" + Kleur, function(data){ //zet data automatisch in de velden
+    	//zet data automatisch in de velden
+    	$.get("restservices/voorraad/" + ID + "/" + Maat + "/" + Kleur, function(data){ 
     	$("#artikelHiddenID_"+count + " input:first-child").val(data.ID);
     	$("#artNaam_"+count + " input:first-child").val(data.Naam);
     	$("#artCategorie_"+count + " input:first-child").val(data.Categorie);
@@ -291,7 +298,8 @@
     }).change();
 	
 	$(".close").click(function(){
-		$(this).closest("tr").remove(); // verwijder een verkoopregel
+		// verwijder een verkoopregel
+		$(this).closest("tr").remove(); 
 	});
  	})
     })    
@@ -332,7 +340,8 @@
     }
     
     $("#verkoopregelPost").click(function(){ 
-    	for (var i=0, n=document.forms.length; i<n; i++){ // valideer elke form op de pagina (1 verkoopregel = 1 form)
+    	// valideer elke form op de pagina (1 verkoopregel = 1 form)
+    	for (var i=0, n=document.forms.length; i<n; i++){ 
     		validate(document.forms[i]);
     	}
     	

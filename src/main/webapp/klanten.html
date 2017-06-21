@@ -132,7 +132,8 @@
 	 table = document.getElementById("klanten");
 	 tr = table.getElementsByTagName("tr");
 	 
-	 for (i = 0; i < tr.length; i++){ //kan klant zoeken op ID, naam, straat, huisnr, postcode, woonplaats of email
+	//kan klant zoeken op ID, naam, straat, huisnr, postcode, woonplaats of email
+	 for (i = 0; i < tr.length; i++){ 
 		 ID = tr[i].getElementsByTagName("td")[0];
 		 Naam = tr[i].getElementsByTagName("td")[1];
 		 Straat  = tr[i].getElementsByTagName("td")[2];
@@ -184,11 +185,13 @@
 			xhr.setRequestHeader( 'Authorization', 'Bearer ' + token);
 			},
 			success: function (klanten) {
-				 $.each(klanten, function(i, klant){ //voeg klant 0 niet toe aan de lijst omdat alle verkopen zonder klant aan klant 0 worden gekoppeld
+				//voeg klant 0 niet toe aan de lijst omdat alle verkopen zonder klant aan klant 0 worden gekoppeld
+				 $.each(klanten, function(i, klant){ 
 					 if(klant.ID == 0){
 						 
 					 }
-					 else { //als klant ID niet 0 is, vul de hele pagina met alle klanten en hun bijhorende gegevens
+					 else { 
+						 //als klant ID niet 0 is, vul de hele pagina met alle klanten en hun bijhorende gegevens
 				   		$("#klanten").append("<tr><td>" + klant.ID + "</td><td>" + klant.Naam + "</td><td>" + klant.Straat + "</td><td>"+ klant.Huisnummer + "</td><td>" + klant.Postcode + "</td><td>" + klant.Woonplaats + "</td><td>" + klant.Email + "</td><td> <button type='button' class='btn btn-primary' id='aankopenBekijken"+klant.ID+"'>Aankopen bekijken</button></td>" 
 				   				+ "<td><button type='button' class='btn btn-danger' id='delete" +klant.ID + "'> Klant Verwijderen</button>" + "</td></tr>");  			
 					 }
@@ -200,9 +203,11 @@
 					 $("#delete" + klant.ID).one("click",function(){   
 				   			var uri = ("/restservices/klanten/") + klant.ID;
 				   			
-				   		  var r = confirm("Weet je zeker dat je deze klant wilt verwijderen?"); //stuur de gebruiker een bericht
+				   		//stuur de gebruiker een bericht
+				   		  var r = confirm("Weet je zeker dat je deze klant wilt verwijderen?"); 
 				   		  
-				   		  if (r == true){ //als gebruiker op OK drukt:
+				   		//als gebruiker op OK drukt:
+				   		  if (r == true){ 
 				   			$.ajax(uri, {
 				   				method: "DELETE",
 				   				beforeSend: function (xhr) {
@@ -222,7 +227,8 @@
 				   			}
 				   			})
 				   		  }
-				   		  else { //gebruiker klikt op annuleren: doe niks
+				   		  else { 
+				   			  //gebruiker klikt op annuleren: doe niks
 				   		  }
 				   			
 				   		})

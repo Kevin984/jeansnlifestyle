@@ -34,7 +34,8 @@ public class VerkoopResource {
 			job.add("KlantID", v.getKlant().getKlantID());
 			jab.add(job);
 		}
-		JsonArray array = jab.build(); //maak van verkoop klasse, json
+		JsonArray array = jab.build(); 
+		//maak van verkoop klasse, json
 		return array.toString();
 	}
 	
@@ -61,8 +62,8 @@ public class VerkoopResource {
 	@POST
 //	@RolesAllowed({"user", "admin"})
 	@Produces("application/json")
-//	@Consumes()
-	public String createVerkoop(@FormParam("verkoopID")int verkoopID, @FormParam("datumVandaag") String datum, @FormParam("klantID") int klantID){ //maak een verkoop met gegevens uit de HTML form
+	//maak een verkoop met gegevens uit de HTML form
+	public String createVerkoop(@FormParam("verkoopID")int verkoopID, @FormParam("datumVandaag") String datum, @FormParam("klantID") int klantID){ 
 		Verkoop newVerkoop = new Verkoop(verkoopID, datum);
 		Klant k =  klantService.getKlantByID(klantID);
     	newVerkoop.setKlant(k);	
@@ -87,7 +88,8 @@ public class VerkoopResource {
 		int ID2 = service.getNextVerkooptID();
 		JsonObjectBuilder job = Json.createObjectBuilder();
 		job.add("nextverkoopID", ID2);
-		return job.build().toString(); //gebruik service en dao om eerstvolgend beschikbare verkoopID te vinden en json ervan te maken
+		//gebruik service en dao om eerstvolgend beschikbare verkoopID te vinden en json ervan te maken
+		return job.build().toString(); 
 	}
 
 }

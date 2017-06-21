@@ -34,7 +34,8 @@ public class VerkoopRegelResource {
 			job.add("ArtikelMaat", v.getArtikel().getMaat());
 			job.add("ArtikelKleur", v.getArtikel().getKleur());
 			job.add("Aantal", v.getAantal());
-			jab.add(job); //maak van alle gegevens van elke verkoopregel JSON
+			//maak van alle gegevens van elke verkoopregel JSON
+			jab.add(job); 
 		}
 		JsonArray array = jab.build();
 		return array.toString();

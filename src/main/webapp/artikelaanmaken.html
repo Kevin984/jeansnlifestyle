@@ -149,7 +149,8 @@
     	var Kleur = $("#Kleur").val();
     	var Merk = $("#Merk").val();
     	var Inkoopprijs = $("#Inkoopprijs").val();
-    	var currRegex = /^\d+(?:\.\d{0,2})$/; // format voor bedragen (4.10, 9.43 etc)
+    	// format voor bedragen (4.10, 9.43 etc)
+    	var currRegex = /^\d+(?:\.\d{0,2})$/; '
     	
     	var Verkoopprijs = $("#Verkoopprijs").val();
     	var Aantal = $("#Aantal").val();
@@ -199,7 +200,8 @@
 			success: function(response){
 				var data = $("#artikelAanmaken").serialize();
 		    	$.post("/restservices/voorraad", data, function(response){
-   				$("#artikelAanmaken")[0].reset(); // reset de form voor nieuwe input
+		    		// reset de form voor nieuwe input
+   				$("#artikelAanmaken")[0].reset(); 
    				
    				$(".expendable").replaceWith("<div class='alert alert-success expendable' id='response'> <strong>Artikel:</strong> " + response.ID + " " + response.Naam + " is toegevoegd aan de voorraad!</div>");
 		    	})

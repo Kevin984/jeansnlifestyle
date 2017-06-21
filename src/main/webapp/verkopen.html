@@ -128,7 +128,8 @@
 		xhr.setRequestHeader( 'Authorization', 'Bearer ' + token);
 		},
 		success: function (verkopenCompleet) { 
-			$.each(verkopenCompleet, function(i, verkoop){ //vul hele pagina met alle verkopen
+			//vul hele pagina met alle verkopen
+			$.each(verkopenCompleet, function(i, verkoop){ 
 		   		$("#verkopenTable").append("<tr><td>" + verkoop.VerkoopID + "</td><td>" + verkoop.Datum + "</td><td>" + verkoop.KlantID 
 		   		+ "</td><td>"+ verkoop.KlantNaam + "</td><td>" + verkoop.ArtikelID + "</td><td>" 
 		   		+ verkoop.ArtikelNaam + "</td><td>" + verkoop.ArtikelMaat + "</td><td>" + verkoop.ArtikelKleur +"</td>" 

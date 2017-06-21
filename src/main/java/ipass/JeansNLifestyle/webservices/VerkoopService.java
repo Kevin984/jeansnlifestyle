@@ -7,7 +7,8 @@ import ipass.JeansNLifestyle.domain.Verkoop;
 import ipass.JeansNLifestyle.persistence.VerkoopDAO;
 
 public class VerkoopService {
-private VerkoopDAO verkoopDAO = new VerkoopDAO(); //import DAO om alle DAOmethoden aan te roepen met alle onderstaande methoden
+	//import DAO om alle DAOmethoden aan te roepen met alle onderstaande methoden
+private VerkoopDAO verkoopDAO = new VerkoopDAO(); 
 	
 public List<Verkoop> getVerkopen(){
 	return verkoopDAO.findAllVerkopen();

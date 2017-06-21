@@ -31,8 +31,10 @@ public class VerkoopDAO extends BaseDAO{
 				int klantID = dbResultSet.getInt("Klant_ID");	
 				
 				Verkoop newVerkoop = new Verkoop(verkoopID, datum);
-				Klant k = klantDAO.findKlantByID(klantID); //zoek klant op gebruikmakend van klant ID
-				newVerkoop.setKlant(k); //geef klant aan verkoop mee
+				//zoek klant op gebruikmakend van klant ID
+				Klant k = klantDAO.findKlantByID(klantID); 
+				//geef klant aan verkoop mee
+				newVerkoop.setKlant(k); 
 				verkopen.add(newVerkoop);
 			}
 		}
@@ -43,7 +45,8 @@ public class VerkoopDAO extends BaseDAO{
 			}
 	
 	public int getNextVerkoopID(){	
-		String query = "SELECT MAX(\"ID\") +1 as nextid FROM public.\"Verkoop\""; //selecteert eerstvolgend beschikbare verkoopID
+		//selecteert eerstvolgend beschikbare verkoopID
+		String query = "SELECT MAX(\"ID\") +1 as nextid FROM public.\"Verkoop\""; 
 		int ID = 0;
 		try(Connection con = super.getConnection()){
 			Statement stmt = con.createStatement();
@@ -91,9 +94,11 @@ public class VerkoopDAO extends BaseDAO{
 		if(verkoopExists){
 			String query = "DELETE FROM public.\"Verkoop\" WHERE \"ID\" = " + verkoop.getVerkoopID();
 			
-			try(Connection con = super.getConnection()){ //maak connectie met de database
+			//maak connectie met de database
+			try(Connection con = super.getConnection()){ 
 				Statement stmt = con.createStatement();
-				if(stmt.executeUpdate(query) == 1){ //als er niet meer en niet minder dan 1 regel verwijderd is, result = true
+				//als er niet meer en niet minder dan 1 regel verwijderd is, result = true
+				if(stmt.executeUpdate(query) == 1){ 
 					result = true;			
 				}
 			} 
