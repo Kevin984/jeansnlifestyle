@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,9 +8,9 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Jeans & Lifestyle - Home</title>
-
-    <!-- Bootstrap core CSS -->
+    <title>Jeans & Lifestyle - Login</title>
+    
+     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
@@ -33,151 +34,101 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    
-   
+
+ <style>.wrapper {    
+	margin-top: 80px;
+	margin-bottom: 20px;
+}
+
+.form-signin {
+  max-width: 420px;
+  padding: 30px 38px 66px;
+  margin: 0 auto;
+  background-color: #eee;
+  border: 3px dotted rgba(0,0,0,0.1);  
+  }
+
+.form-signin-heading {
+  text-align:center;
+  margin-bottom: 30px;
+}
+
+.form-control {
+  position: relative;
+  font-size: 16px;
+  height: auto;
+  padding: 10px;
+}
+
+input[type="text"] {
+  margin-bottom: 0px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+input[type="password"] {
+  margin-bottom: 20px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.colorgraph {
+  height: 7px;
+  border-top: 0;
+  background: #c4e17f;
+  border-radius: 5px;
+  background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+}</style>
   </head>
 
   <body>
+  <div class = "container">
+	<div class="wrapper">
+<form method="post" action="hoofdpagina.html" id="loginform" class="form-signin">
+<h3 class="form-signin-heading">Welkom bij Jeans & Lifestyle!</h3>
+			  <hr class="colorgraph"><br>
+			  <div class="expendable"></div>
+<input type="text" class="form-control" required=""  name="username" autofocus="" />
+<input type="password" class="form-control" required="" name="password" />
+<input type="button" class="btn btn-lg btn-primary btn-block" value="login" id="login" />
+</form>
+</div>
+</div>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="https://localhost:8443/JeansNLifestyle/index.html">Jeans & Lifestyle</a>
-        </div>
-        
-      </div>
-    </nav>
 
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-            <div id="sidebar" class="well sidebar-nav">
-                <h5><i class="glyphicon glyphicon-home"></i>
-                    <small><b>MANAGEMENT</b></small>
-                </h5>
-                <ul class="nav nav-pills nav-stacked">
-                    <li class="active"><a href="index.html">Home</a></li>
-                    <li><a href="kassa.html">Kassa</a></li>
-                    <li><a href="klanten.html">Klanten</a></li>
-					<li><a href="voorraad.html">Voorraad</a></li>
-					<li><a href="verkopen.html">Verkopen</a></li>
-                </ul>
-                <h5><i class="glyphicon glyphicon-log-out"></i>
-                    <a href="#"><span id="logout">Uitloggen</span></a>
-                </h5>
-               
-				
-				
-            </div>
-        </div>
-		
-		
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-         <h1 class="page-header">Home</h1>
 
-          <div class="row placeholders">
-            <div class="col-xs-6 col-sm-3 placeholder">
-           <a href="kassa.html">   <img href="#" src="images/cashregister.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail"> </a>
-              <h4>Kassa</h4>
-             
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-            <a href="klanten.html">   <img src="images/customers.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail"> </a>
-              <h4>Klanten</h4>
-             
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-           <a href="voorraad.html">    <img src="images/shirt.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail"> </a>
-              <h4>Voorraad</h4>
-            
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-          <a href="verkopen.html">     <img src="images/sales.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail"> </a>
-              <h4>Verkopen</h4>
-            
-            </div>
-          </div>
 
-          <h2 class="sub-header">Het nieuwe voorraadsysteem</h2>
-          <div class="table-responsive">
-                 
-					
-                <div class="col-md-9">
-                    <div class="col-md-6 wow fadeInRight delay-02s">
-                      
-                        <div class="icon-text">
-                            <h3 class="txt-tl">Makkelijk te gebruiken</h3>
-                            <p class="txt-para">Er is gekozen voor een makkelijk leesbaar design. Mocht je er toch niet uitkomen kun je hier altijd tips lezen! </p>
-							 <hr class="botm-line">
-                        </div>
-                    </div>
-                    <div class="col-md-6 wow fadeInRight delay-02s">
-                       
-                        <div class="icon-text">
-                            <h3 class="txt-tl">Bootstrap</h3>
-                            <p class="txt-para">Voor het design van het nieuwe systeem is er gebruik gemaakt van Bootstrap. Mooi he?</p>
-							 <hr class="botm-line">
-                        </div>
-                    </div>
-                    <div class="col-md-6 wow fadeInRight delay-04s">
-                     
-                        <div class="icon-text">
-                            <h3 class="txt-tl">Klanten database</h3>
-                            <p class="txt-para">In het nieuwe systeem houden we ook klanten bij. Hoe meer een klant koopt, hoe meer korting! </p>
-							 <hr class="botm-line">
-                        </div>
-                    </div>
-                    <div class="col-md-6 wow fadeInRight delay-04s">
-                       
-                        <div class="icon-text">
-                            <h3 class="txt-tl">Verkopen inzien</h3>
-                            <p class="txt-para">Verkopen van elke klant inzien? Dat kan! Klik op de grote paarse knop boven 'Verkopen'. </p>
-							 <hr class="botm-line">
-                        </div>
-                    </div>
-                    <div class="col-md-6 wow fadeInRight delay-06s">
-                       
-                        <div class="icon-text">
-                            <h3 class="txt-tl">Makkelijk artikelen zoeken</h3>
-                            <p class="txt-para">In de navigatiebar van de voorraad kun je snel artikelen opzoeken op naam, artikelnummer, maat, merk of kleur! </p>
-							 <hr class="botm-line">
-                        </div>
-                    </div>
-                    <div class="col-md-6 wow fadeInRight delay-06s">
-                       
-                        <div class="icon-text">
-                            <h3 class="txt-tl">Snelle links</h3>
-                            <p class="txt-para">In het hoofdmenu aan de linker kant zijn er een aantal snelle links beschikbaar om snel tussen artikelen te navigeren. </p>
-							 <hr class="botm-line">
-                        </div>
-                    </div>
-               
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="js/bootstrap.min.js"></script>
     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
     <script src="assets/js/vendor/holder.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+
+    <script>
     
-    <script>   $("#logout").click(function(event){
-    	window.sessionStorage.setItem("sessionToken", "guest");
-    	window.location.href="inlogscherm.html";
+    
+    $("#login").click(function(event) {
+    	var data = $("#loginform").serialize();
+    	$.post("restservices/authentication", data, function(response) {
+    	window.sessionStorage.setItem("sessionToken", response); //geef gebruiker een token voor rechten
+    	window.location.href="hoofdpagina.html";
+    	}).fail(function(jqXHR, textStatus, errorThrown) {
+    	console.log(textStatus);
+    	console.log(errorThrown);
+    	$(".expendable").replaceWith("<div class='alert alert-danger' id='response'>Gebruikersnaam of wachtwoord is onjuist.</div>");
+    	});
     	
-    })</script>
+    	});
+    
+ 
+    </script>
   </body>
 </html>
+
+
+	
