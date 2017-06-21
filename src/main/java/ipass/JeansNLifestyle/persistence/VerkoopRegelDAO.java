@@ -62,13 +62,12 @@ public class VerkoopRegelDAO extends BaseDAO{
 			preparedStatement = con.prepareStatement(query);
 			preparedStatement.setInt(1, verkoopregel.getVerkoop().getVerkoopID());
 			preparedStatement.setInt(2, verkoopregel.getArtikel().getArtikelID());
-			preparedStatement.setString(3,  verkoopregel.getArtikel().getMaat());
+			preparedStatement.setString(3, verkoopregel.getArtikel().getMaat());
 			preparedStatement.setString(4, verkoopregel.getArtikel().getKleur());
 			preparedStatement.setInt(5, verkoopregel.getAantal());
 			preparedStatement.executeUpdate();	
 			preparedStatement.close();
 			
-		
 			System.out.println("Verkoopregel: " + verkoopregel.getVerkoop().getVerkoopID() + " " + verkoopregel.getArtikel().getArtikelID() + " " + verkoopregel.getArtikel().getMaat() + " " + verkoopregel.getArtikel().getKleur()  + " saved.");
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
