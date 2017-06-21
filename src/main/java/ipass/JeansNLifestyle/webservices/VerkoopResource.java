@@ -5,7 +5,6 @@ import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObjectBuilder;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -15,17 +14,14 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import ipass.JeansNLifestyle.domain.Klant;
 import ipass.JeansNLifestyle.domain.Verkoop;
-import ipass.JeansNLifestyle.domain.VerkoopCompleet;
-import ipass.JeansNLifestyle.persistence.KlantDAO;
 
 @Path("/verkopen")
 public class VerkoopResource {
-//	private KlantDAO klantDAO = new KlantDAO();
 	private KlantService klantService = new KlantService();
 	VerkoopService verkoopService = VerkoopServiceProvider.getVerkoopService();
 	
 	@GET
-	//@RolesAllowed({"user", "admin"})
+	//@RolesAllowed({"user", "admin"}) << staat tussen comments omdat er geen rechten worden gegeven, zelfs wanneer je inlogt als user/admin. Bij delete en GET werkt dit wel, POST en PUT niet
 	@Produces("application/json")
 	public String getVerkopen(){
 		VerkoopService service = VerkoopServiceProvider.getVerkoopService();
@@ -38,7 +34,7 @@ public class VerkoopResource {
 			job.add("KlantID", v.getKlant().getKlantID());
 			jab.add(job);
 		}
-		JsonArray array = jab.build();
+		JsonArray array = jab.build(); //maak van verkoop klasse, json
 		return array.toString();
 	}
 	
@@ -66,7 +62,7 @@ public class VerkoopResource {
 //	@RolesAllowed({"user", "admin"})
 	@Produces("application/json")
 //	@Consumes()
-	public String createVerkoop(@FormParam("verkoopID")int verkoopID, @FormParam("datumVandaag") String datum, @FormParam("klantID") int klantID){
+	public String createVerkoop(@FormParam("verkoopID")int verkoopID, @FormParam("datumVandaag") String datum, @FormParam("klantID") int klantID){ //maak een verkoop met gegevens uit de HTML form
 		Verkoop newVerkoop = new Verkoop(verkoopID, datum);
 		Klant k =  klantService.getKlantByID(klantID);
     	newVerkoop.setKlant(k);	
@@ -86,12 +82,12 @@ public class VerkoopResource {
 //	@RolesAllowed({"user", "admin"})
 	@Path("nextval")
 	@Produces("application/json")
-	public String getNextKlantID(){
+	public String getNextVerkoopID(){
 		VerkoopService service = VerkoopServiceProvider.getVerkoopService();
 		int ID2 = service.getNextVerkooptID();
 		JsonObjectBuilder job = Json.createObjectBuilder();
 		job.add("nextverkoopID", ID2);
-		return job.build().toString();
+		return job.build().toString(); //gebruik service en dao om eerstvolgend beschikbare verkoopID te vinden en json ervan te maken
 	}
 
 }

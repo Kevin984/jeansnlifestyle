@@ -92,7 +92,7 @@ public class Artikel {
 	  return aantal;
   }
   
-  public void setAantal(int aantal){
-	  this.aantal = aantal;
+  public void setAantal(int aant){
+	  aantal = aant;
   }
 }

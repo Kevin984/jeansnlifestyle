@@ -44,12 +44,7 @@
           </button>
           <a class="navbar-brand" href="https://localhost:8443/JeansNLifestyle/index.html">Jeans & Lifestyle</a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Uitloggen</a></li>
-          </ul>
-         
-        </div>
+       
       </div>
     </nav>
 
@@ -57,35 +52,19 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <div id="sidebar" class="well sidebar-nav">
-                <h5><i class="glyphicon glyphicon-home"></i>
+                 <h5><i class="glyphicon glyphicon-home"></i>
                     <small><b>MANAGEMENT</b></small>
                 </h5>
                 <ul class="nav nav-pills nav-stacked">
-                    <li class="active"><a>Hoofdmenu</a></li>
+                    <li><a href="index.html">Home</a></li>
                     <li><a href="kassa.html">Kassa</a></li>
                     <li><a href="klanten.html">Klanten</a></li>
-					<li><a href="voorraad.html">Voorraad</a></li>
+					<li class="active"><a href="voorraad.html">Voorraad</a></li>
 					<li><a href="verkopen.html">Verkopen</a></li>
                 </ul>
-                <h5><i class="glyphicon glyphicon-align-left"></i>
-                    <small><b>KLEDING</b></small>
+                <h5><i class="glyphicon glyphicon-log-out"></i>
+                    <a href="#"><span id="logout">Uitloggen</span></a>
                 </h5>
-                <ul class="nav nav-pills nav-stacked">
-                     <li><a href="#">Hoodies & Sweatshirts</a></li>
-                    <li><a href="#">Truien & Vesten</a></li>
-                    <li><a href="#">Shirts & T-Shirts</a></li>
-					 <li><a href="#">Broeken</a></li>
-					   <li><a href="#">Schoenen</a></li>
-                </ul>
-				
-				<h5><i class="glyphicon glyphicon-tags"></i>
-                    <small><b>MERKEN</b></small>
-				</h5>
-					 <ul class="nav nav-pills nav-stacked">
-					 <li><a href="#">G-Star</a></li>
-                    <li><a href="#">Nike</a></li>
-					 <li><a href="#">Adidas</a></li>
-                </ul>
             </div>
         </div>
 		
@@ -155,6 +134,12 @@
     <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
     
     <script>
+    $("#logout").click(function(event){
+    	window.sessionStorage.setItem("sessionToken", "guest");
+    	window.location.href="inlogscherm.html";
+    	
+    })
+    
     $("#artikelPost").click(function(response){
     
     	var ID = $("#ID").val();
@@ -164,11 +149,12 @@
     	var Kleur = $("#Kleur").val();
     	var Merk = $("#Merk").val();
     	var Inkoopprijs = $("#Inkoopprijs").val();
-    	var currRegex = /^\d+(?:\.\d{0,2})$/; <!-- format voor bedragen (4.10, 9.43 etc) -->
+    	var currRegex = /^\d+(?:\.\d{0,2})$/; // format voor bedragen (4.10, 9.43 etc)
     	
     	var Verkoopprijs = $("#Verkoopprijs").val();
     	var Aantal = $("#Aantal").val();
     	
+    	//controleer of alle in ingevuld en niet groter is dan wat de database toe staat. isNaN gebruikt om te kijken of input wel een nummer is
     	if( isNaN(ID) || ID.length != 4){
     		$(".expendable").replaceWith("<div class='alert alert-warning expendable' id='response'>ID moet 4 cijfers bevatten!</div>");
     	}
@@ -202,8 +188,8 @@
 
     	}
     	
-    	else if(isNaN(Aantal) || Aantal.length < 1){
-    		$(".expendable").replaceWith("<div class='alert alert-warning expendable' id='response'>Aantal moet een getal zijn!</div>");
+    	else if(isNaN(Aantal) || Aantal.length < 1 || !(Aantal % 1 === 0)){
+    		$(".expendable").replaceWith("<div class='alert alert-warning expendable' id='response'>Aantal moet een heel getal zijn!</div>");
 
     	}
     	
@@ -213,7 +199,7 @@
 			success: function(response){
 				var data = $("#artikelAanmaken").serialize();
 		    	$.post("/JeansNLifestyle/restservices/voorraad", data, function(response){
-   				$("#artikelAanmaken")[0].reset(); <!-- reset de form voor nieuwe input -->
+   				$("#artikelAanmaken")[0].reset(); // reset de form voor nieuwe input
    				
    				$(".expendable").replaceWith("<div class='alert alert-success expendable' id='response'> <strong>Artikel:</strong> " + response.ID + " " + response.Naam + " is toegevoegd aan de voorraad!</div>");
 		    	})

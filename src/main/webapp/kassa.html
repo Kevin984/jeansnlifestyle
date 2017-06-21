@@ -7,11 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>J&L Kassa</title>
-    
-    <style>
-    a{color: inherit;}
-    </style>
+    <title>Jeans & Lifestyle - Artikel aanmaken</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -48,66 +44,38 @@
           </button>
           <a class="navbar-brand" href="https://localhost:8443/JeansNLifestyle/index.html">Jeans & Lifestyle</a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Uitloggen</a></li>
-          </ul>
-         
-        </div>
+       
       </div>
     </nav>
 
-   <div class="container-fluid">
+    <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <div id="sidebar" class="well sidebar-nav">
-                <h5><i class="glyphicon glyphicon-home"></i>
+                 <h5><i class="glyphicon glyphicon-home"></i>
                     <small><b>MANAGEMENT</b></small>
                 </h5>
                 <ul class="nav nav-pills nav-stacked">
-                    <li class="active"><a>Hoofdmenu</a></li>
-                    <li><a href="kassa.html">Kassa</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="active"><a href="kassa.html">Kassa</a></li>
                     <li><a href="klanten.html">Klanten</a></li>
 					<li><a href="voorraad.html">Voorraad</a></li>
 					<li><a href="verkopen.html">Verkopen</a></li>
                 </ul>
-                <h5><i class="glyphicon glyphicon-align-left"></i>
-                    <small><b>KLEDING</b></small>
+                <h5><i class="glyphicon glyphicon-log-out"></i>
+                    <a href="#"><span id="logout">Uitloggen</span></a>
                 </h5>
-                <ul class="nav nav-pills nav-stacked">
-                      <li><a href="#">Hoodies & Sweatshirts</a></li>
-                    <li><a href="#">Truien & Vesten</a></li>
-                    <li><a href="#">Shirts & T-Shirts</a></li>
-					 <li><a href="#">Broeken</a></li>
-					   <li><a href="#">Schoenen</a></li>
-                </ul>
-				
-				<h5><i class="glyphicon glyphicon-tags"></i>
-                    <small><b>MERKEN</b></small>
-				</h5>
-					 <ul class="nav nav-pills nav-stacked">
-					 <li><a href="#">G-Star</a></li>
-                    <li><a href="#">Nike</a></li>
-					 <li><a href="#">Adidas</a></li>
-                </ul>
             </div>
         </div>
 		
-		
-		
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header" id="verkoopAanmakenH1">Kassa <div class="pull-right"><button type="button" class="btn btn-success"><a href="klantaanmaken.html">Klant aanmaken</a></button></div></h1>
-
-          
-
-          <div class="table-responsive">          
-          <table class="table table-striped" id="verkoopTable">
-          
-          
-           
-           <thead>
-           
-           <tr>
+          <h1 id="VerkoopRegelAanmakenH1" class="page-header">Verkoop invoeren</h1>
+          <div class='expendable'></div>
+		  
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+               <tr>
           <th>VerkoopID: </th>
           <th>Datum:</th>
           <th>Klant Email</th>
@@ -118,13 +86,13 @@
           <form id="verkoopInvoeren">
           <td id="NextVerkoopID"><input type="text"class="form-control"  id="IDVI" name='verkoopID' readonly/></td>
           <td id="datumVandaag"><input type="text" class='form-control' id='datumVandaag' name='datumVandaag' readonly/></td>
-          <td><select class="form-control" id="klantEmail" ><option></option></select></td>
-          <td id="klantIDForm"><input type="text" class='form-control' id='klantID'  name='klantID' readonly/></td>
+          <td><select class="form-control" id="klantEmail" ></select></td>
+          <td id="klantIDForm"><input type="text" class='form-control' id='klantID'  name='klantID' readonly></td>
           </form>
           </tr>
           
-      <tr>
-        <th class="col-xs-2">Gescand artikel</th>
+                <tr>
+                  <th class="col-xs-2">Gescand artikel</th>
         <th class="col-xs-2">Naam</th>
         <th class="col-xs-2">Categorie</th>
         <th class="col-xs-1">Maat</th>
@@ -133,61 +101,33 @@
 		<th class="col-xs-1">Aantal</th>
 		<th class="col-xs-1">Verkoopprijs</th>
 		<th class="col-xs-1"><button type="button" class="btn btn-info" id="regelToevoegen">Regel toevoegen</button></th>
-      </tr>
-    </thead>
-    <tbody id="verkopenTbody">
-    </tbody>
-    </table>
-    
-    
- 
-  
-  </div>
-
-
-   <div class="pull-right"> 
+				 <th></th>
+                </tr>
+              </thead>
+              
+              <tbody id='verkopenTbody'>
+              
+              </tbody>
+            </table>
+            
+             <div class="pull-right"> 
    
    <table>
-   <tr>
-   <td><strong>Totaal aantal artikelen:</strong></td>
-   <td></td>
-   <td class="pull-right">3</td>
-   </tr>
    
-     <tr>
-   <td><strong>Verkoopprijs (excl btw):</strong></td>
-     <td></td>
-   <td class="pull-right">194.03</td>
-   </tr>
-      <tr>
-   <td><strong>21% BTW:</strong></td>
-     <td></td>
-   <td class="pull-right">34.99</td>
-   </tr>
-      <tr>
-   <td><strong>Totaal prijs:</strong></td>
-     <td></td>
-   <td class="pull-right">343.50</td>
-   
-   </tr>
  
    
    <tr>
    <td></td>
    <td></td>
-   <td><button type="button" class="btn btn-success" id="verkoopAfronden">Verkoop afronden</button> </div></td>
+   <td><button type="button" class="btn btn-success" id="verkoopregelPost">Verkoop afronden</button></td>
    </tr>
    </table>
-
           </div>
-		  
+            
+          </div>
         </div>
-	
       </div>
-	  
     </div>
-	
-	</div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -200,7 +140,22 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
     
-    <script>   					
+    <script>
+    $("#logout").click(function(event){
+    	window.sessionStorage.setItem("sessionToken", "guest");
+    	window.location.href="inlogscherm.html";
+    })
+    
+    var d = new Date();
+    var month = d.getMonth()+1;
+    var day = d.getDate();
+    var datumVandaag = ((''+day).length<2?'0' : '') + day + '-' + ((''+month).length<2?'0' : '') + month + '-' + d.getFullYear();
+    
+    var klantid0 = document.getElementById("klantID");
+    setTimeout(function(){ klantid0.value = "0"}, 500); //zet standaard klantID op 0 voor wanneer een klant niet zijn/haar naam in het systeem wilt
+    
+    
+    $("#datumVandaag input:first-child").val(datumVandaag);
     
     $.ajax({
    		url: "restservices/verkopen/nextval",
@@ -210,11 +165,11 @@
    		xhr.setRequestHeader( 'Authorization', 'Bearer ' + token);
    		},
    		success: function (IDResult) {
-   			$("#IDVI").val(IDResult.nextverkoopID);
+   			$("#IDVI").val(IDResult.nextverkoopID); //zet eerst volgend beschikbare verkoopID in een niet-aanpasbaar inputveld
    	     }
        });
     
-   
+    
     $.ajax({
 		url: "restservices/klanten/",
 		method: "GET",
@@ -224,12 +179,12 @@
 		},
 		success: function (klanten) {
 			 $.each(klanten, function(i, klant){
-				 $("#klantEmail").append("<option>" + klant.ID + ", " + klant.Email + "</option>");
+				 $("#klantEmail").append("<option>" + klant.ID + ", " + klant.Email + "</option>"); // vul klantemail input met alle klanten emails en IDs
 			 })	
 	     }
     });
     
-    $("#klantEmail").change(function(){
+    $("#klantEmail").change(function(){ //wanneer klant email veranderd, verander klant ID ook
 		var klantID = "";
 	
     	$("#klantEmail option:selected").each(function(){
@@ -240,40 +195,48 @@
     	$("#klantIDForm input:first-child").val(data.ID);
     	})
     }).change();
-
-	
-    var d = new Date();
-    var month = d.getMonth()+1;
-    var day = d.getDate();
-    var datumVandaag = ((''+day).length<2?'0' : '') + day + '-' + ((''+month).length<2?'0' : '') + month + '-' + d.getFullYear();
     
-    $("#datumVandaag input:first-child").val(datumVandaag);
-   
+    $.ajax({
+   		url: "restservices/verkopen/nextval",
+   		method: "GET",
+   		beforeSend: function (xhr) {
+   		var token = window.sessionStorage.getItem("sessionToken");
+   		xhr.setRequestHeader( 'Authorization', 'Bearer ' + token);
+   		},
+   		success: function (IDResult) {
+   			$(".IDVRI").val(IDResult.nextverkoopID);
+   	     }
+       });
     
-   var count = 0;
-   $(function(){
-	 $("#regelToevoegen").click(function(){
-		count += 1;
-		$("#verkopenTbody").append("<tr><form id='verkoopregelForm"+ count +"'>"
-			+ "<td id='verkoopID_" 		+ count + 	"' style='display:none;'> <input   form='verkoopRegelForm"+ count+"' type='text' class='form-control' 								name='VerkoopID'>	</input></td>"
-			+ "<td id='hiddenArtikelID_" + count + 	"' style='display:none;'> <input  form='verkoopRegelForm"+ count+"' type='text' class='form-control'  	name='ArtikelID'    >	</input></td>"
-			+ "<td id='artID_" 			+ count + 	"'> <select   class='form-control' id='artikelInputID_" + count+  "'>	<option></option>				</select></td>"
-			+ "<td id='artNaam_" 		+ count + 	"'>	<input   class='form-control' readonly>															</input></td>"
-	        + "<td id='artCategorie_" 	+ count + 	"'>	<input   class='form-control' readonly>															</input></td>"
-	        + "<td id='artMaat_" 		+ count + 	"'> <input   form='verkoopRegelForm"+ count+"'class='form-control' 									name='ArtikelMaat'  readonly>	</input></td>"
-		    + "<td id='artKleur_" 		+ count + 	"'> <input   form='verkoopRegelForm"+ count+"'class='form-control' 									name='ArtikelKleur' readonly>	</input></td>"
-		    + "<td id='artMerk_" 		+ count + 	"'> <input   class='form-control' readonly>															</input></td>"		
-			+ "<td id='artAantal_" 		+ count +	"'> <select form='verkoopRegelForm"+ count+"' class='form-control' 									name='Aantal'>"
-			+ "<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option>"
-    		+ "<option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option>"
-    		+ "<option>18</option><option>19</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option>"
-    		+ "<option>27</option><option>28</option><option>29</option><option>30</option><option>31</option><option>32</option><option>33</option><option>34</option>"
-    		+ "<option>35</option><option>36</option><option>37</option><option>38</option><option>39</option><option>40</option>						</select></td>"
-    		+ "<td id='artVerkoopprijs_"+ count + 	"'>	<input  class='form-control' readonly>															</input></td>"
-    		+ "<td><button type='button' class='close' aria-label='Close'>"
-    		+ "<span aria-hidden='true'>&times;</span></button></td></form></tr>");
-		
-		 $.ajax({
+    
+    var count = 0;
+    $(function(){
+ 	 $("#regelToevoegen").click(function(){
+ 		count += 1;
+ 		$("#verkopenTbody").append("<tr>"
+ 		    +"<form id='verkoopRegelForm"+count+"'>"
+ 		    +"  <td id='verkoopID_"+count+"' style='display:none;'> <input form='verkoopRegelForm"+ count+"' class='form-control IDVRI' name='VerkoopID' readonly  ></input></td>"
+ 		    +"	<td id='artikelHiddenID_"+count+"' style='display:none;'> <input  form='verkoopRegelForm"+ count+"'type='text' class='form-control' 	name='ArtikelID'    readonly ></input></td>"
+ 			+"	<td id='artID_"+count+"'> 			<select class='form-control' id='artikelInputID_"+count+"' name='ArtikelID'><option></option></select></td>"
+ 			+"	<td id='artNaam_"+count+"'>			<input  class='form-control' readonly value=''></input></td>"
+ 			+"  <td id='artCategorie_"+count+"'>	<input  class='form-control' readonly value=''></input></td>"
+ 			+"  <td id='artMaat_"+count+"'> 		<input  form='verkoopRegelForm"+ count+"'class='form-control' name='ArtikelMaat' readonly value=''></input></td>"
+ 			+"	<td id='artKleur_"+count+"'> 		<input  form='verkoopRegelForm"+ count+"'class='form-control' name='ArtikelKleur' readonly value=''></input></td>"
+ 			+"	<td id='artMerk_"+count+"'> 		<input  class='form-control' readonly value=''></input></td>"
+ 			+"	<td id='artAantal_"+count+"'> 		<select form='verkoopRegelForm"+ count+"'class='form-control calcAantal' name='Aantal'>"
+ 			+"		<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option>"
+ 		    +"		<option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option>"
+ 		    +"		<option>18</option><option>19</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option>"
+ 		    +"		<option>27</option><option>28</option><option>29</option><option>30</option><option>31</option><option>32</option><option>33</option><option>34</option>"
+ 		    +"		<option>35</option><option>36</option><option>37</option><option>38</option><option>39</option><option>40</option></select></td>"
+ 		    +"	<td id='artVerkoopprijs_"+count+"'><input class='form-control' readonly value=''></input></td>"
+ 		    +"	<td><button type='button' class='close' aria-label='Close'>"
+ 		    +"	   <span aria-hidden='true'>&times;</span></button></td>"
+ 		    +"   </form>"
+ 		    +"   </tr>"
+ 		);
+ 		
+ 		 $.ajax({
 		   		url: "restservices/verkopen/nextval",
 		   		method: "GET",
 		   		beforeSend: function (xhr) {
@@ -281,96 +244,115 @@
 		   		xhr.setRequestHeader( 'Authorization', 'Bearer ' + token);
 		   		},
 		   		success: function (IDResult) {
-		   			$(".IDVRI").val(IDResult.nextverkoopID);
+		   			$(".IDVRI").val(IDResult.nextverkoopID); //elke verkoopregel krijgt de verkoopID mee gestuurd
 		   	     }
 		       });
-		
-		  $.ajax({
-				url: "restservices/voorraad/",
-				method: "GET",
-				beforeSend: function (xhr) {
-				var token = window.sessionStorage.getItem("sessionToken");
-				xhr.setRequestHeader( 'Authorization', 'Bearer ' + token);
-				},
-				success: function (voorraad) {
-					$.each(voorraad, function(i, voorraadArtikel){
-						$("#artikelInputID_" + count).append("<option>" + voorraadArtikel.ID + ", " + voorraadArtikel.Maat +", " +  voorraadArtikel.Kleur + "</option>");
-					})
-					}
-				});
-		    
-		    
-			$("#artikelInputID_" + count).change(function(){
-				var ID = "";
-				var Maat = "";
-				var Kleur = "";
-				
-		    	$("#artikelInputID_" + count + " option:selected").each(function(){
-		    		ID += $(this).text().split(', ')[0];
-		    		Maat += $(this).text().split(', ')[1];
-		    		Kleur += $(this).text().split(', ')[2];
-		    	});
-		    	
-		    	$.get("restservices/voorraad/" + ID + "/" + Maat + "/" + Kleur, function(data){
-	<!--	    	$("#hiddenArtikelID_"+count + " input:first-child").val(data.ID); -->
-		    	$("#artNaam_" + count +" input:first-child").val(data.Naam);
-		    	$("#artCategorie_" + count + " input:first-child").val(data.Categorie);
-		    	$("#artMaat_" + count + " input:first-child").val(data.Maat);
-		    	$("#artKleur_" + count + " input:first-child").val(data.Kleur);
-		    	$("#artMerk_" + count + " input:first-child").val(data.Merk);
-		    	$("#artVerkoopprijs_" + count + " input:first-child").val(data.Verkoopprijs);
-		    	})
-		    }).change();
-		
-		
-		$(".close").click(function(){
-			$(this).closest("tr").remove();
+    
+    $.ajax({
+		url: "restservices/voorraad/",
+		method: "GET",
+		beforeSend: function (xhr) {
+		var token = window.sessionStorage.getItem("sessionToken");
+		xhr.setRequestHeader( 'Authorization', 'Bearer ' + token);
+		},
+		success: function (voorraad) {
+			$.each(voorraad, function(i, voorraadArtikel){ //vul lijst onder 'gescand artikel' met alle artikelen uit de voorraad
+				$("#artikelInputID_"+count).append("<option>" + voorraadArtikel.ID + ", " + voorraadArtikel.Maat +", " +  voorraadArtikel.Kleur + "</option>");
+			})
+			}
 		});
-			
-		 
-	 })
-   })    
+    
+    
+	$("#artikelInputID_"+count).change(function(){ //wanneer een artikel ID/maat/kleur (gescand artikel) wordt veranderd bij de input, veranderd de rest mee (zie hieronder)
+		var ID = "";
+		var Maat = "";
+		var Kleur = "";
+		
+    	$("#artikelInputID_"+count + " option:selected").each(function(){
+    		ID += $(this).text().split(', ')[0];
+    		Maat += $(this).text().split(', ')[1];
+    		Kleur += $(this).text().split(', ')[2];
+    	});
+    	
+    	$.get("restservices/voorraad/" + ID + "/" + Maat + "/" + Kleur, function(data){ //zet data automatisch in de velden
+    	$("#artikelHiddenID_"+count + " input:first-child").val(data.ID);
+    	$("#artNaam_"+count + " input:first-child").val(data.Naam);
+    	$("#artCategorie_"+count + " input:first-child").val(data.Categorie);
+    	$("#artMaat_"+count +  " input:first-child").val(data.Maat);
+    	$("#artKleur_"+count +  " input:first-child").val(data.Kleur);
+    	$("#artMerk_"+count +  " input:first-child").val(data.Merk);
+    	$("#artVerkoopprijs_"+count + " input:first-child").val(data.Verkoopprijs);
+    	
+    	if($("#artAantal_"+count).val() > data.Aantal || data.Aantal == 0){
+    		alert("Je hebt een groter aantal geselecteerd dan dat er daadwerkelijk aanwezig is in de voorraad!");
+    		$(".expendable").replaceWith("<div class='alert alert-warning expendable' id='response'> Let op! Er zijn nog maar <strong>"+data.Aantal+"</strong> stuks aanwezig van artikel: "+data.ID+" "+data.Naam+", maat: '"+data.Maat+"', kleur: "+data.Kleur+".</div>");
+    	}
+    	})
+    }).change();
+	
+	$(".close").click(function(){
+		$(this).closest("tr").remove(); // verwijder een verkoopregel
+	});
+ 	})
+    })    
+	    
+    	
    
-   
-   function validate(form){
+    
+    function validate(form){
     	var formID = form.id;
     	var formDetails = $('#'+formID);
-    	
+    
     	if(formID == 'verkoopInvoeren'){
     		$.ajax({
     			url: "restservices/verkopen/",
     			success: function(response){		
         	var data = $("#verkoopInvoeren").serialize();
         	$.post("/JeansNLifestyle/restservices/verkopen", data, function(response){
-        		$("#verkoopAanmakenH1").after("<div class='alert alert-success' id='response'> <strong>Verkoop:</strong> " + response.VerkoopID  + " is toegevoegd!</div>");
-        	})
-    			
+        //		$(".expendable").replaceWith("<div class='alert alert-success' id='response'> <strong>Verkoop:</strong> " + response.VerkoopID  + " is toegevoegd!</div>");
+        	})		
         	}
         	
         	});
     	}
-    	
     	else{
     	
     	$.ajax({
 			url: "restservices/verkoopregels/",
-			success: function(response){		
+			success: function(response){
+			
 		var data = formDetails.serialize();
     	$.post("/JeansNLifestyle/restservices/verkoopregels", data, function(response){
-    		$("#VerkoopRegelAanmakenH1").after("<div class='alert alert-success' id='response'> <strong>Verkoopregel:</strong> " + response.VerkoopID  + " is toegevoegd!</div>");
+    		localStorage.setItem("Expendable",""+response.VerkoopID+"");
+    		
     	})	
     	}
     	});
     	}
-    	
     }
-   
-$("#verkoopAfronden").click(function(response){
-	for (var i=0, n=document.forms.length; i<n; i++){
-		validate(document.forms[i]);
-	}
-     });
     
+    $("#verkoopregelPost").click(function(){ 
+    	for (var i=0, n=document.forms.length; i<n; i++){ // valideer elke form op de pagina (1 verkoopregel = 1 form)
+    		validate(document.forms[i]);
+    	}
+    	
+    	function reloadPage(){
+    		location.reload();
+    	}
+    	setTimeout(reloadPage, 300);
+    	
+	});
+    
+    //zorgt ervoor dat nadat de page refresht wordt, er een bericht komt dat de verkoop met success is aangemaakt en maakt daarna de localstorage leeg voor de volgende verkoop
+    function storageMessage(){
+    if(localStorage.getItem("Expendable")){
+    	$(".expendable").replaceWith("<div class='alert alert-success expendable' id='response'> <strong>Verkoop:</strong> " + localStorage.getItem("Expendable") + " is toegevoegd!</div>");
+    	localStorage.clear();
+    }
+    }
+    setTimeout(storageMessage, 400);
+    
+   
     </script>
   </body>
 </html>

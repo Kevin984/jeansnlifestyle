@@ -7,7 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Dashboard Template for Bootstrap</title>
+    <title>Jeans & Lifestyle - Klant aanmaken</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -44,12 +44,7 @@
           </button>
           <a class="navbar-brand" href="https://localhost:8443/JeansNLifestyle/index.html">Jeans & Lifestyle</a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Uitloggen</a></li>
-          </ul>
-         
-        </div>
+        
       </div>
     </nav>
 
@@ -61,31 +56,15 @@
                     <small><b>MANAGEMENT</b></small>
                 </h5>
                 <ul class="nav nav-pills nav-stacked">
-                    <li class="active"><a>Hoofdmenu</a></li>
+                    <li><a href="index.html">Home</a></li>
                     <li><a href="kassa.html">Kassa</a></li>
-                    <li><a href="klanten.html">Klanten</a></li>
+                    <li class="active"><a href="klanten.html">Klanten</a></li>
 					<li><a href="voorraad.html">Voorraad</a></li>
 					<li><a href="verkopen.html">Verkopen</a></li>
                 </ul>
-                <h5><i class="glyphicon glyphicon-align-left"></i>
-                    <small><b>KLEDING</b></small>
+                <h5><i class="glyphicon glyphicon-log-out"></i>
+                    <a href="#"><span id="logout">Uitloggen</span></a>
                 </h5>
-                <ul class="nav nav-pills nav-stacked">
-                      <li><a href="#">Hoodies & Sweatshirts</a></li>
-                    <li><a href="#">Truien & Vesten</a></li>
-                    <li><a href="#">Shirts & T-Shirts</a></li>
-					 <li><a href="#">Broeken</a></li>
-					   <li><a href="#">Schoenen</a></li>
-                </ul>
-				
-				<h5><i class="glyphicon glyphicon-tags"></i>
-                    <small><b>MERKEN</b></small>
-				</h5>
-					 <ul class="nav nav-pills nav-stacked">
-					 <li><a href="#">G-Star</a></li>
-                    <li><a href="#">Nike</a></li>
-					 <li><a href="#">Adidas</a></li>
-                </ul>
             </div>
         </div>
 		
@@ -141,6 +120,12 @@
     
        <script>
        
+       $("#logout").click(function(event){
+       	window.sessionStorage.setItem("sessionToken", "guest");
+       	window.location.href="inlogscherm.html";
+       	
+       })
+       
        $.ajax({
    		url: "restservices/klanten/nextval",
    		method: "GET",
@@ -149,28 +134,9 @@
    		xhr.setRequestHeader( 'Authorization', 'Bearer ' + token);
    		},
    		success: function (IDResult) {
-   			$("#IDKA").val(IDResult.nextklantID); 
+   			$("#IDKA").val(IDResult.nextklantID); //zet eerst mogelijke klantID (niet aanpasbaar)
    	     }
        });
-       
-   
-      
-  	 $("#klantAanmaken").validate({
-	    	rules:{
-	    		ID: "required",
-	    		Huisnummer: "required"
-	    	},
-	    	
-	     messages:{
-	    	 ID: "ID moet ingevuld zijn!",
-	    	 Huisnummer: "Huisnummer moet ingevuld zijn!"
-	     },
-	     
-	     submitHandler: function(form){
-	    	 form.submit();
-	     }
-	     
-	     });
        
        
     $("#klantPost").click(function(response){
@@ -182,6 +148,8 @@
     	var Woonplaats = $("#Woonplaats").val();
     	var Email = $("#Email").val();
     	
+    	
+    	//check of alles is ingevuld (lengte groter dan 1) en niet groter dan dat de database toe staat
     	if(Naam.length < 1 || Naam.length > 50){
     		$(".expendable").replaceWith("<div class='alert alert-warning expendable' id='response'>Naam moet 1-50 karakters bevatten!</div>");
     	}
@@ -213,11 +181,23 @@
 			success: function(response){
 				var data = $("#klantAanmaken").serialize();
 		    	$.post("/JeansNLifestyle/restservices/klanten", data, function(response){
-   				
+	   				$("#klantAanmaken")[0].reset(); // reset de form voor nieuwe input 
+
    				function notification(){
    				$(".expendable").replaceWith("<div class='alert alert-success expendable' id='response'> <strong>Klant:</strong> " + response.Naam + " is toegevoegd!</div>");
+   				$.ajax({
+   			   		url: "restservices/klanten/nextval",
+   			   		method: "GET",
+   			   		beforeSend: function (xhr) {
+   			   		var token = window.sessionStorage.getItem("sessionToken");
+   			   		xhr.setRequestHeader( 'Authorization', 'Bearer ' + token);
+   			   		},
+   			   		success: function (IDResult) {
+   			   			$("#IDKA").val(IDResult.nextklantID); 
+   			   	     }
+   			       });
 		    	}
-   				setTimeout(notification, 300); <!-- laat bericht zien,  0.3 seconde na de pagina refresh -->
+   				setTimeout(notification, 300); // laat bericht zien,  0.3 seconde na de pagina refresh
 
 		    	
 		    	})

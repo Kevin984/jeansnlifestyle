@@ -2,11 +2,13 @@ package ipass.JeansNLifestyle.webservices;
 
 
 
+import javax.annotation.security.RolesAllowed;
 //import javax.annotation.security.RolesAllowed;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObjectBuilder;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -15,7 +17,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 //import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 
+import ipass.JeansNLifestyle.domain.Artikel;
 import ipass.JeansNLifestyle.domain.Klant;
 
 @Path("/klanten")
@@ -24,7 +28,7 @@ public class KlantenResource {
 	KlantService klantService = KlantServiceProvider.getKlantService();
 	
 	@GET
-//	@RolesAllowed({"user", "admin"})
+//	@RolesAllowed({"user", "admin"}) << staat tussen comments omdat er geen rechten worden gegeven, zelfs wanneer je inlogt als user/admin. Bij delete en GET werkt dit wel, POST en PUT niet
 	@Produces("application/json")
 	public String getKlanten() {
 	KlantService service = KlantServiceProvider.getKlantService();
@@ -64,7 +68,7 @@ public class KlantenResource {
 		job.add("Postcode", k.getPostcode());
 		job.add("Woonplaats", k.getWoonplaats());
 		job.add("Email", k.getEmail());
-		return job.build().toString();
+		return job.build().toString(); //maak json van een klant object waar ID gelijk is aan klantID
 	} 
 	
 	@GET
@@ -109,19 +113,28 @@ public class KlantenResource {
 		
 		return job;
 	}
-	/*
-	@GET
-//	@RolesAllowed({"user", "admin"})
-	@Path("/aankopen")
-	@Produces("application/json")
-	public String klantAankopen(@QueryParam("ID") int ID){
-		JsonObjectBuilder job = Json.createObjectBuilder();
-		Klant klant = klantDAO.findKlantByID(ID);
-		job.add("ID", ID);
-		job.add("Naam", klant.getNaam());
-		job.add("Aankopen", (JsonValue) klant.getAankopen());
-		// art nr, naam, cat, maat, kleur, merk, aantal gekocht, verkoop prijs per stuk, totaalprijs
+	
+	@DELETE
+	@RolesAllowed({"user", "admin"})
+	@Path("{ID}")
+	public Response deleteArtikel(@PathParam("ID") int ID ){
 		
-		return job.build().toString();
-	}*/
+		Klant found = null;
+		
+		for (Klant k : klantService.getAllKlanten()){
+			if (k.getKlantID() == ID){
+				found = k;
+				break;
+			}
+		}
+		
+		if(found == null){
+			return Response.status(Response.Status.NOT_FOUND).build();
+		}
+		else {
+			klantService.deleteKlant(ID);
+			
+		return Response.ok().build();
+		}
+	}
 }

@@ -8,7 +8,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Login - Jeans&Lifestyle</title>
+    <title>Jeans & Lifestyle - Login</title>
     
      <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -88,8 +88,9 @@ input[type="password"] {
   <div class = "container">
 	<div class="wrapper">
 <form method="post" action="https://localhost:8443/JeansNLifestyle/index.html" id="loginform" class="form-signin">
-<h3 class="form-signin-heading">Welcome Back! Please Sign In</h3>
+<h3 class="form-signin-heading">Welkom bij Jeans & Lifestyle!</h3>
 			  <hr class="colorgraph"><br>
+			  <div class="expendable"></div>
 <input type="text" class="form-control" required=""  name="username" autofocus="" />
 <input type="password" class="form-control" required="" name="password" />
 <input type="button" class="btn btn-lg btn-primary btn-block" value="login" id="login" />
@@ -109,15 +110,17 @@ input[type="password"] {
     <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
 
     <script>
+    
+    
     $("#login").click(function(event) {
     	var data = $("#loginform").serialize();
     	$.post("restservices/authentication", data, function(response) {
-    	window.sessionStorage.setItem("sessionToken", response);
-    	window.location.href="https://localhost:8443/JeansNLifestyle/index.html";
+    	window.sessionStorage.setItem("sessionToken", response); //geef gebruiker een token voor rechten
+    	window.location.href="index.html";
     	}).fail(function(jqXHR, textStatus, errorThrown) {
     	console.log(textStatus);
     	console.log(errorThrown);
-    	
+    	$(".expendable").replaceWith("<div class='alert alert-danger' id='response'>Gebruikersnaam of wachtwoord is onjuist.</div>");
     	});
     	
     	});

@@ -23,18 +23,18 @@ import ipass.JeansNLifestyle.webservices.ArtikelService;
 import ipass.JeansNLifestyle.webservices.ArtikelServiceProvider;
 import ipass.JeansNLifestyle.domain.Artikel;
 
-@Path("/voorraad")
+@Path("/voorraad") //pad waar json komt te staan (restservices/voorraad)
 public class ArtikelResource {
 	ArtikelService artikelService = ArtikelServiceProvider.getVoorraadService();
 	
 	@GET
-	//@RolesAllowed({"user", "admin"})
+	//@RolesAllowed({"user", "admin"}) << staat tussen comments omdat er geen rechten worden gegeven, zelfs wanneer je inlogt als user/admin. Bij delete en GET werkt dit wel, POST en PUT niet
 	@Produces("application/json")
 	public String getVoorraad(){
 		ArtikelService service = ArtikelServiceProvider.getVoorraadService();
 		JsonArrayBuilder jab = Json.createArrayBuilder();
 		
-		for(Artikel a : service.getVoorraad()){
+		for(Artikel a : service.getVoorraad()){ //maak json van alle gegevens van elk artikel
 			JsonObjectBuilder job = Json.createObjectBuilder();
 			job.add("ID", a.getArtikelID());
 			job.add("Naam", a.getNaam());
@@ -53,7 +53,7 @@ public class ArtikelResource {
 	
 	
 	@GET
-//	@RolesAllowed({"user", "admin"})
+//	@RolesAllowed({"user", "admin"}) 
 	@Path("{ID}/{Maat}/{Kleur}")
 	@Produces("application/json")
 	public String getArtikelInfo(@PathParam("ID") int ID, @PathParam("Maat")String maat, @PathParam("Kleur") String kleur){
@@ -79,7 +79,6 @@ public class ArtikelResource {
 	@POST
 //	@RolesAllowed({"user", "admin"})
 	@Produces("application/json")
-	//@Consumes("application/x-www-form-urlencoded")
 	public String createArtikel(@FormParam("ID")int ID, @FormParam("Naam") String nm, @FormParam("Categorie") String cat, @FormParam("Maat") String maat, @FormParam("Kleur") String kleur, @FormParam("Merk")String merk ,@FormParam("Inkoopprijs") double ink, @FormParam("Verkoopprijs") double verk, @FormParam("Aantal") int aant){
 		Artikel newArtikel = new Artikel(ID, nm, cat, maat, kleur, merk, ink, verk, aant);
 		
@@ -104,7 +103,7 @@ public class ArtikelResource {
 	
 	
 	@DELETE
-	@RolesAllowed({"user", "admin"})
+	@RolesAllowed({"user", "admin"}) //hier doen de rollen het wel, alleen user en admin kunnen dus een artikel verwijderen
 	@Path("{ID}/{Maat}/{Kleur}")
 	public Response deleteArtikel(@PathParam("ID") int ID, @PathParam("Maat")String maat, @PathParam("Kleur") String kleur ){
 		Artikel found = null;
@@ -125,45 +124,54 @@ public class ArtikelResource {
 		}
 	}
 	
+	
+	//hieronder staan 2 geprobeerde update functies, beide werken niet (403 forbidden error)
 	/*
 	@PUT
 	@Path("update/{ID}/{Maat}/{Kleur}")
+	@RolesAllowed({"user","admin"})
+	@Produces("application/json")
 	public Response updateArtikel(@PathParam("ID") int ID, @PathParam("Maat")String maat, @PathParam("Kleur")String kleur,
 			@FormParam("Naam") String naam, @FormParam("Categorie") String categorie, @FormParam("Merk") String merk,
 			@FormParam("Inkoopprijs") double inkoopprijs, @FormParam("Verkoopprijs") double verkoopprijs, @FormParam("Aantal") int aantal){
-		Voorraad found = null;
+		Artikel found = null;
 		
-		for(Voorraad v : voorraadService.getVoorraad()){
-			if (v.getArtikel().getID() == ID && v.getArtikel().getMaat().equals(maat) && v.getArtikel().getKleur().equals(kleur)){
-				found = v;
+		for(Artikel a : artikelService.getVoorraad()){
+			if (a.getArtikelID() == ID && a.getMaat().equals(maat) && a.getKleur().equals(kleur)){
+				found = a;
 				break;
 				}
 		}
-		
 		if(found == null){
 			return Response.status(Response.Status.NOT_FOUND).build();
 		}
 		else {	
-			found.getArtikel().setArtikelNaam(naam);
-			found.getArtikel().setArtikelCategorie(categorie);
-			found.getArtikel().setArtikelMerk(merk);
-			found.getArtikel().setInkoopprijs(inkoopprijs);
-			found.getArtikel().setVerkoopprijs(verkoopprijs);
+			found.setArtikelNaam(naam);
+			found.setArtikelCategorie(categorie);
+			found.setArtikelMerk(merk);
+			found.setInkoopprijs(inkoopprijs);
+			found.setVerkoopprijs(verkoopprijs);
 			found.setAantal(aantal);
 			
-			voorraadService.updateArtikel(found);
+			artikelService.updateArtikel(found);
 		return Response.ok().build();
 	}
-	}
-	*/
+	}*/
 	
+	/*
+	@PUT
+	@Path("{ID}/{Maat}/{Kleur}")
+	@RolesAllowed({"user","admin"})
+	@Produces("application/json")
+	public Response updateArtikel(){
 		
+	}
+*/
+		/*
 	@PUT
 	@RolesAllowed({"user", "admin"})
-	@Path("{ID}/{Maat}/{Kleur}")
+	@Path("update/{ID}/{Maat}/{Kleur}")
 	@Produces("application/json")
-	//@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-//	@Consumes("application/json")
 	public String updateArtikel(@PathParam("ID") int ID, @PathParam("Maat")String maat, @PathParam("Kleur")String kleur,
 	@FormParam("Naam") String naam, @FormParam("Categorie") String categorie, @FormParam("Merk") String merk,
 	@FormParam("Inkoopprijs") double inkoopprijs, @FormParam("Verkoopprijs") double verkoopprijs, @FormParam("Aantal") int aantal){
@@ -185,5 +193,5 @@ public class ArtikelResource {
 		}
 		throw new WebApplicationException("Artikel niet gevonden");
 	}
-
+*/
 }

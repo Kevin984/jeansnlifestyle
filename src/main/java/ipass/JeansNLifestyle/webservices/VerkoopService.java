@@ -3,11 +3,11 @@ package ipass.JeansNLifestyle.webservices;
 
 import java.util.List;
 import ipass.JeansNLifestyle.domain.Verkoop;
-import ipass.JeansNLifestyle.domain.VerkoopCompleet;
+
 import ipass.JeansNLifestyle.persistence.VerkoopDAO;
 
 public class VerkoopService {
-private VerkoopDAO verkoopDAO = new VerkoopDAO();
+private VerkoopDAO verkoopDAO = new VerkoopDAO(); //import DAO om alle DAOmethoden aan te roepen met alle onderstaande methoden
 	
 public List<Verkoop> getVerkopen(){
 	return verkoopDAO.findAllVerkopen();
@@ -34,7 +34,7 @@ public List<Verkoop> getVerkopen(){
 	
 	public void saveVerkoop(Verkoop verkoop){
 		if (verkoop != null){
-			verkoopDAO.saveVerkoop(verkoop);;
+			verkoopDAO.saveVerkoop(verkoop);
 		}
 		else throw new IllegalArgumentException("kan niet opslaan");
 	} 

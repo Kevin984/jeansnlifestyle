@@ -34,7 +34,7 @@ public class VerkoopRegelResource {
 			job.add("ArtikelMaat", v.getArtikel().getMaat());
 			job.add("ArtikelKleur", v.getArtikel().getKleur());
 			job.add("Aantal", v.getAantal());
-			jab.add(job);
+			jab.add(job); //maak van alle gegevens van elke verkoopregel JSON
 		}
 		JsonArray array = jab.build();
 		return array.toString();
@@ -42,7 +42,7 @@ public class VerkoopRegelResource {
 	
 	
 	@GET
-//	@RolesAllowed({"user", "admin"})
+//	@RolesAllowed({"user", "admin"}) << staat tussen comments omdat er geen rechten worden gegeven, zelfs wanneer je inlogt als user/admin. Bij delete en GET werkt dit wel, POST en PUT niet
 	@Path("{ID}/{ArtikelID}/{ArtikelMaat}/{ArtikelKleur}")
 	@Produces("application/json")
 	public String getVerkoopRegelInfo(@PathParam("ID") int ID, @PathParam("ArtikelID") int artikelID, @PathParam("ArtikelMaat")String artikelMaat, @PathParam("ArtikelKleur") String artikelKleur){
@@ -62,23 +62,26 @@ public class VerkoopRegelResource {
 		return job.build().toString();
 	} 
 	
-	/*
+	
 	@POST
 //	@RolesAllowed({"user", "admin"})
 	@Produces("application/json")
-	//@Consumes("application/x-www-form-urlencoded")
 	public String createVerkoopRegel(@FormParam("VerkoopID")int ID, @FormParam("ArtikelID") int artikelID, @FormParam("ArtikelMaat") String artikelMaat, @FormParam("ArtikelKleur") String artikelKleur, @FormParam("Aantal") int aant){
 		VerkoopService verkoopService = new VerkoopService();
 		ArtikelService artikelService = new ArtikelService();
 		
 		Verkoop newVerkoop = verkoopService.getVerkoopByID(ID);
 		Artikel newArtikel = artikelService.getArtikelByPK(artikelID, artikelMaat, artikelKleur);
+		int artikelAantal = newArtikel.getAantal();
+		int newArtikelAantal = artikelAantal - aant;
+		newArtikel.setAantal(newArtikelAantal); 
+		artikelService.updateArtikel(newArtikel); //verlaag het aantal van een artikel met het aantal dat geselecteerd wordt bij de verkoop
 		
 		VerkoopRegel newVerkoopRegel = new VerkoopRegel(newVerkoop, newArtikel, aant);
 		verkoopregelService.saveVerkoopRegel(newVerkoopRegel);
 		return verkoopregelToJson(newVerkoopRegel).build().toString();
 	}
-	*/
+	
 	private JsonObjectBuilder verkoopregelToJson(VerkoopRegel v ){
 		JsonObjectBuilder job = Json.createObjectBuilder();
 		job.add("VerkoopID", v.getVerkoop().getVerkoopID());
@@ -91,8 +94,32 @@ public class VerkoopRegelResource {
 	
 	
 	
-	
-	
+	@Path("/completeverkopen")
+	@GET
+	//@RolesAllowed({"user", "admin"})
+	@Produces("application/json")
+	public String getCompleteVerkopen(){
+		VerkoopRegelService service = VerkoopRegelServiceProvider.getVerkoopRegelService();
+		JsonArrayBuilder jab = Json.createArrayBuilder();
+		//maak json van complete verkoop (dus incl verkoopregels en klant naam etc) ipv alleen verkoopID, datum en klantID)
+		for(VerkoopRegel v : service.getCompleteVerkopen()){
+			JsonObjectBuilder job = Json.createObjectBuilder();
+			job.add("VerkoopID", v.getVerkoop().getVerkoopID());
+			job.add("Datum", v.getVerkoop().getVerkoopDatum());
+			job.add("KlantID", v.getVerkoop().getKlant().getKlantID());
+			job.add("KlantNaam", v.getVerkoop().getKlant().getNaam());
+			job.add("ArtikelID", v.getArtikel().getArtikelID());
+			job.add("ArtikelNaam", v.getArtikel().getNaam());
+			job.add("ArtikelMaat", v.getArtikel().getMaat());
+			job.add("ArtikelKleur", v.getArtikel().getKleur());
+			job.add("ArtikelMerk", v.getArtikel().getMerk());
+			job.add("ArtikelVerkoopprijs", v.getArtikel().getVerkoopprijs());
+			job.add("Aantal", v.getAantal());
+			jab.add(job);
+		}
+		JsonArray array = jab.build();
+		return array.toString();
+	}
 	
 	
 	

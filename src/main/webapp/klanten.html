@@ -7,7 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Dashboard Template for Bootstrap</title>
+    <title>Jeans & Lifestyle - Klanten</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -45,9 +45,10 @@
           <a class="navbar-brand" href="https://localhost:8443/JeansNLifestyle/index.html">Jeans & Lifestyle</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Uitloggen</a></li>
-          </ul>
+          
+           <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" id="klantInput" onkeyup="filterFunction()" placeholder="Klant Zoeken">
+          </form>
          
         </div>
       </div>
@@ -61,39 +62,25 @@
                     <small><b>MANAGEMENT</b></small>
                 </h5>
                 <ul class="nav nav-pills nav-stacked">
-                    <li class="active"><a>Hoofdmenu</a></li>
+                    <li><a href="index.html">Home</a></li>
                     <li><a href="kassa.html">Kassa</a></li>
-                    <li><a href="klanten.html">Klanten</a></li>
+                    <li class="active"><a href="klanten.html">Klanten</a></li>
 					<li><a href="voorraad.html">Voorraad</a></li>
 					<li><a href="verkopen.html">Verkopen</a></li>
                 </ul>
-                <h5><i class="glyphicon glyphicon-align-left"></i>
-                    <small><b>KLEDING</b></small>
+                <h5><i class="glyphicon glyphicon-log-out"></i>
+                    <a href="#"><span id="logout">Uitloggen</span></a>
                 </h5>
-                <ul class="nav nav-pills nav-stacked">
-                     <li><a href="#">Hoodies & Sweatshirts</a></li>
-                    <li><a href="#">Truien & Vesten</a></li>
-                    <li><a href="#">Shirts & T-Shirts</a></li>
-					 <li><a href="#">Broeken</a></li>
-					   <li><a href="#">Schoenen</a></li>
-                </ul>
 				
-				<h5><i class="glyphicon glyphicon-tags"></i>
-                    <small><b>MERKEN</b></small>
-				</h5>
-					 <ul class="nav nav-pills nav-stacked">
-					 <li><a href="#">G-Star</a></li>
-                    <li><a href="#">Nike</a></li>
-					 <li><a href="#">Adidas</a></li>
-                </ul>
+				
             </div>
         </div>
 		
 		
 		
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Klanten <div class="pull-right"><button type="button" class="btn btn-success">Klant aanmaken</button></div></h1>
-		  
+          <h1 class="page-header">Klanten <div class="pull-right"><button type="button" id="klantAanmakenPagina" class="btn btn-success">Klant aanmaken</button></div></h1>
+		  <div class='expendable'></div>
 		  
           <div class="table-responsive">
             <table class="table table-striped" id="klanten">
@@ -107,6 +94,7 @@
 				  <th>Woonplaats</th>
 				  <th>Email</th>
 				 <th>Aankopen</th>
+				 <th>Verwijderen</th>
                 </tr>
               </thead>
               <tbody>
@@ -131,6 +119,62 @@
     <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
     
     <script> 
+    $("#logout").click(function(event){
+    	window.sessionStorage.setItem("sessionToken", "guest");
+    	window.location.href="inlogscherm.html";
+    	
+    })
+    
+    function filterFunction(){ <!-- filteren van items in de klanten lijst -->
+	 var input, filter, table, tr, td, i;
+	 input = document.getElementById("klantInput");
+	 filter = input.value.toUpperCase();
+	 table = document.getElementById("klanten");
+	 tr = table.getElementsByTagName("tr");
+	 
+	 for (i = 0; i < tr.length; i++){ //kan klant zoeken op ID, naam, straat, huisnr, postcode, woonplaats of email
+		 ID = tr[i].getElementsByTagName("td")[0];
+		 Naam = tr[i].getElementsByTagName("td")[1];
+		 Straat  = tr[i].getElementsByTagName("td")[2];
+		 Huisnr = tr[i].getElementsByTagName("td")[3];
+		 Postcode  = tr[i].getElementsByTagName("td")[4];
+		 Woonplaats  = tr[i].getElementsByTagName("td")[5];
+		 Email  = tr[i].getElementsByTagName("td")[6];
+		 if(ID || Naam || Straat || Huisnr || Postcode || Woonplaats || Email){
+			 if (ID.innerHTML.toUpperCase().indexOf(filter) > -1){
+				 tr[i].style.display="";
+			 }
+			 
+			 else if (Naam.innerHTML.toUpperCase().indexOf(filter) > -1){
+				 tr[i].style.display="";
+			 }
+			 
+			 else if (Straat.innerHTML.toUpperCase().indexOf(filter) > -1){
+				 tr[i].style.display="";
+			 }
+			 
+			 else if (Huisnr.innerHTML.toUpperCase().indexOf(filter) > -1){
+				 tr[i].style.display="";
+			 }
+			 
+			 else if (Postcode.innerHTML.toUpperCase().indexOf(filter) > -1){
+				 tr[i].style.display="";
+			 }
+			 else if (Woonplaats.innerHTML.toUpperCase().indexOf(filter) > -1){
+				 tr[i].style.display="";
+			 }
+			 
+			 else if (Email.innerHTML.toUpperCase().indexOf(filter) > -1){
+				 tr[i].style.display="";
+			 }
+			  			 
+			 else {
+				 tr[i].style.display = "none";
+			 } 
+		 }
+	 }
+}
+
     
     	$.ajax({
 			url: "restservices/klanten/",
@@ -140,16 +184,57 @@
 			xhr.setRequestHeader( 'Authorization', 'Bearer ' + token);
 			},
 			success: function (klanten) {
-				 $.each(klanten, function(i, klant){
+				 $.each(klanten, function(i, klant){ //voeg klant 0 niet toe aan de lijst omdat alle verkopen zonder klant aan klant 0 worden gekoppeld
 					 if(klant.ID == 0){
 						 
 					 }
-					 else {
-				   		$("#klanten").append("<tr><td>" + klant.ID + "</td><td>" + klant.Naam + "</td><td>" + klant.Straat + "</td><td>"+ klant.Huisnummer + "</td><td>" + klant.Postcode + "</td><td>" + klant.Woonplaats + "</td><td>" + klant.Email + "</td><td> <button type='button' class='btn btn-primary'>Aankopen bekijken</button></td></tr>");    			
+					 else { //als klant ID niet 0 is, vul de hele pagina met alle klanten en hun bijhorende gegevens
+				   		$("#klanten").append("<tr><td>" + klant.ID + "</td><td>" + klant.Naam + "</td><td>" + klant.Straat + "</td><td>"+ klant.Huisnummer + "</td><td>" + klant.Postcode + "</td><td>" + klant.Woonplaats + "</td><td>" + klant.Email + "</td><td> <button type='button' class='btn btn-primary' id='aankopenBekijken"+klant.ID+"'>Aankopen bekijken</button></td>" 
+				   				+ "<td><button type='button' class='btn btn-danger' id='delete" +klant.ID + "'> Klant Verwijderen</button>" + "</td></tr>");  			
 					 }
-					 })	
+					 
+					  $("#aankopenBekijken" + klant.ID).click(function(event){
+					    	alert("Deze functie is nog niet beschikbaar. Onze excuses.");
+					    })
+					 
+					 $("#delete" + klant.ID).one("click",function(){   
+				   			var uri = ("/JeansNLifestyle/restservices/klanten/") + klant.ID;
+				   			
+				   		  var r = confirm("Weet je zeker dat je deze klant wilt verwijderen?"); //stuur de gebruiker een bericht
+				   		  
+				   		  if (r == true){ //als gebruiker op OK drukt:
+				   			$.ajax(uri, {
+				   				method: "DELETE",
+				   				beforeSend: function (xhr) {
+				   					var token = window.sessionStorage.getItem("sessionToken");
+				   					xhr.setRequestHeader( 'Authorization', 'Bearer ' + token);
+				   					},
+				   				success: function(response){	
+				   				$("body").load("/JeansNLifestyle/klanten.html")	// refresh pagina
+				   				
+				   				function notification(){
+				   				$(".expendable").replaceWith("<div class='alert alert-success' id='response'> <strong>Klant:</strong> " + klant.ID + " " + klant.Naam + " is verwijderd!</div>");
+				   				} 
+				   				setTimeout(notification, 300); // laat bericht zien,  0.3 seconde na de pagina refresh
+				   				},
+				   				error: function(response){
+				   				$(".expendable").replaceWith("<div class='alert alert-danger' id='response'> Er is iets mis gegaan! Klant is <strong>niet</strong> verwijderd.</div>");
+				   			}
+				   			})
+				   		  }
+				   		  else { //gebruiker klikt op annuleren: doe niks
+				   		  }
+				   			
+				   		})
+				 
+				 
+				 })	
 		}
 		});
+    	
+    	$("#klantAanmakenPagina").click(function(){
+       		window.location.href ='klantaanmaken.html';
+       	});
     
     
     </script>
