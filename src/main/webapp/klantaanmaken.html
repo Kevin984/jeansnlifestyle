@@ -181,7 +181,7 @@
 			url: "restservices/klanten/",
 			success: function(response){
 				var data = $("#klantAanmaken").serialize();
-		    	$.post("/restservices/klanten", data, function(response){
+		    	$.post("restservices/klanten", data, function(response){
 		    		// reset de form voor nieuwe input 
 	   				$("#klantAanmaken")[0].reset(); 
 

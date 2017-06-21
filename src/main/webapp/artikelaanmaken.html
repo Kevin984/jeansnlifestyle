@@ -199,7 +199,7 @@
 			url: "restservices/voorraad/",
 			success: function(response){
 				var data = $("#artikelAanmaken").serialize();
-		    	$.post("/restservices/voorraad", data, function(response){
+		    	$.post("restservices/voorraad", data, function(response){
 		    		// reset de form voor nieuwe input
    				$("#artikelAanmaken")[0].reset(); 
    				
