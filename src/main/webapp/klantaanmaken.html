@@ -180,7 +180,7 @@
 			url: "restservices/klanten/",
 			success: function(response){
 				var data = $("#klantAanmaken").serialize();
-		    	$.post("/JeansNLifestyle/restservices/klanten", data, function(response){
+		    	$.post("/restservices/klanten", data, function(response){
 	   				$("#klantAanmaken")[0].reset(); // reset de form voor nieuwe input 
 
    				function notification(){

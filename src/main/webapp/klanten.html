@@ -198,7 +198,7 @@
 					    })
 					 
 					 $("#delete" + klant.ID).one("click",function(){   
-				   			var uri = ("/JeansNLifestyle/restservices/klanten/") + klant.ID;
+				   			var uri = ("/restservices/klanten/") + klant.ID;
 				   			
 				   		  var r = confirm("Weet je zeker dat je deze klant wilt verwijderen?"); //stuur de gebruiker een bericht
 				   		  
@@ -210,7 +210,7 @@
 				   					xhr.setRequestHeader( 'Authorization', 'Bearer ' + token);
 				   					},
 				   				success: function(response){	
-				   				$("body").load("/JeansNLifestyle/klanten.html")	// refresh pagina
+				   				$("body").load("klanten.html")	// refresh pagina
 				   				
 				   				function notification(){
 				   				$(".expendable").replaceWith("<div class='alert alert-success' id='response'> <strong>Klant:</strong> " + klant.ID + " " + klant.Naam + " is verwijderd!</div>");

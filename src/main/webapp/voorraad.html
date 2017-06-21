@@ -203,7 +203,7 @@
 			   			+		"</form></tr>");
 			   			
 			   			$("#wijzigArtikel" + artikel.ID + artikel.Maat + artikel.Kleur).click(function(){
-			   				/* var uri = "/JeansNLifestyle/restservices/voorraad/" + artikel.ID + "/" + artikel.Maat + "/" + artikel.Kleur;
+			   				/* var uri = "/restservices/voorraad/" + artikel.ID + "/" + artikel.Maat + "/" + artikel.Kleur;
 			   	   			$.ajax(uri, {
 			   	   				method: "PUT",
 			   	   				data: $("#updateArtikelForm").serialize(),
@@ -228,7 +228,7 @@
 			   		
 			
 			   		$("#delete" + artikel.ID + artikel.Maat + artikel.Kleur).one("click",function(){   
-			   			var uri = ("/JeansNLifestyle/restservices/voorraad/") + artikel.ID + "/" + artikel.Maat + "/" + artikel.Kleur;
+			   			var uri = ("/restservices/voorraad/") + artikel.ID + "/" + artikel.Maat + "/" + artikel.Kleur;
 			   			
 			   		  var r = confirm("Weet je zeker dat je dit artikel wilt verwijderen?"); //vraag gebruiker om op OK of annuleren te drukken
 			   		  
@@ -240,7 +240,7 @@
 			   					xhr.setRequestHeader( 'Authorization', 'Bearer ' + token);
 			   					},
 			   				success: function(response){	
-			   				$("body").load("https://localhost:8443/JeansNLifestyle/voorraad.html")	// refresh pagina
+			   				$("body").load("voorraad.html")	// refresh pagina
 			   				
 			   				function notification(){
 			   				$(".expendable").replaceWith("<div class='alert alert-success' id='response'> <strong>Artikel:</strong> " + artikel.ID + " " + artikel.Naam + " is verwijderd uit de voorraad!</div>");

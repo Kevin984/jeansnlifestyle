@@ -308,7 +308,7 @@
     			url: "restservices/verkopen/",
     			success: function(response){		
         	var data = $("#verkoopInvoeren").serialize();
-        	$.post("/JeansNLifestyle/restservices/verkopen", data, function(response){
+        	$.post("/restservices/verkopen", data, function(response){
         //		$(".expendable").replaceWith("<div class='alert alert-success' id='response'> <strong>Verkoop:</strong> " + response.VerkoopID  + " is toegevoegd!</div>");
         	})		
         	}
@@ -322,7 +322,7 @@
 			success: function(response){
 			
 		var data = formDetails.serialize();
-    	$.post("/JeansNLifestyle/restservices/verkoopregels", data, function(response){
+    	$.post("/restservices/verkoopregels", data, function(response){
     		localStorage.setItem("Expendable",""+response.VerkoopID+"");
     		
     	})	

@@ -198,7 +198,7 @@
 			url: "restservices/voorraad/",
 			success: function(response){
 				var data = $("#artikelAanmaken").serialize();
-		    	$.post("/JeansNLifestyle/restservices/voorraad", data, function(response){
+		    	$.post("/restservices/voorraad", data, function(response){
    				$("#artikelAanmaken")[0].reset(); // reset de form voor nieuwe input
    				
    				$(".expendable").replaceWith("<div class='alert alert-success expendable' id='response'> <strong>Artikel:</strong> " + response.ID + " " + response.Naam + " is toegevoegd aan de voorraad!</div>");
